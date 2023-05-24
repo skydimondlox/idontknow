@@ -1,3 +1,9 @@
 {
-  "item.idkmod.idontknow": "I Don't Know"
+  "item.idkmod.idontknow": "I Don't Know",
+  "item.idkmod.itssomething": "It's Something",
+
+  "block.idkmod.idontknowblock": "Block of I Don't Know",
+
+  "creativemodetab.idontknowtab": "I Don't Know Tab"
+
 }

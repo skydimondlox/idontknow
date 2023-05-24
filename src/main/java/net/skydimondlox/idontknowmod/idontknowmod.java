@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.skydimondlox.idontknowmod.block.ModBlocks;
+import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
 import net.skydimondlox.idontknowmod.item.ModItems;
 import org.slf4j.Logger;
 
@@ -24,6 +26,7 @@ public class idontknowmod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -38,6 +41,17 @@ public class idontknowmod {
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if(event.getTab() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.I_DONT_KNOW);
+            event.accept(ModItems.ITS_SOMETHING);
+        }
+
+        if(event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.IDONTKNOWBLOCK);
+        }
+
+        if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB) {
+            event.accept(ModItems.I_DONT_KNOW);
+            event.accept(ModItems.ITS_SOMETHING);
+            event.accept(ModBlocks.IDONTKNOWBLOCK);
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "idkmod:item/black_opal"
+    "layer0": "idkmod:item/itssomething"
   }
 }
