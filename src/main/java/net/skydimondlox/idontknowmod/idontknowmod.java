@@ -52,6 +52,8 @@ public class idontknowmod {
             event.accept(ModItems.I_DONT_KNOW);
             event.accept(ModItems.ITS_SOMETHING);
             event.accept(ModBlocks.IDONTKNOWBLOCK);
+            event.accept(ModBlocks.ITSABLOCK);
+            event.accept(ModItems.HOW_BOUT_THIS);
         }
     }
 

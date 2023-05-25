@@ -1,5 +1,15 @@
-// 1.19.4	2023-05-24T18:20:18.9506805	Recipes
+// 1.19.4	2023-05-26T08:49:48.4149728	Recipes
 ff57166b299b726bd387d1b6d20c1da88d2f3047 data/idkmod/advancements/recipes/building_blocks/idontknow.json
+b909b052d48338da651ed2ae8a3c56120016be72 data/idkmod/advancements/recipes/building_blocks/itssomething.json
+87ac6692377f279e87695b3958cbc343a045ac83 data/idkmod/advancements/recipes/misc/howboutthis.json
 3e7f082623e109ed6941fc07e5dbe34dc6cc97d6 data/idkmod/advancements/recipes/misc/idontknowblock.json
+48dbe07a69a3ee17a727f49b3c698ce2d82f3340 data/idkmod/advancements/recipes/misc/itsablock.json
+302c5ceff5042c68c1eb0a95fa8768a2307cba68 data/idkmod/recipes/howboutthis.json
 15cc56ee6239f8c39a3a65acaf75086edcc1d212 data/idkmod/recipes/idontknow.json
 ff732934730f5f06c7a6d4fd9bd6bd86070840fa data/idkmod/recipes/idontknowblock.json
+d10d5fdd203d415a46a4ceded94633d4d4731ecb data/idkmod/recipes/itsablock.json
+13795e30eb8780274eafa5fbc9fb02462d974500 data/idkmod/recipes/itssomething.json
+946b4f81aef2490b3bf10c59f4f5c5c9a4a3ee0e data/minecraft/advancements/recipes/misc/idontknow_from_blasting_itssomething.json
+42a461518886ae0d7fbbb98551ec443cf7a24008 data/minecraft/advancements/recipes/misc/idontknow_from_smelting_itssomething.json
+8a6a808c4ea2822155550b697cde594a71e3c871 data/minecraft/recipes/idontknow_from_blasting_itssomething.json
+ef88914cfe52ba36fdc6ddfe81707e1ce94755f5 data/minecraft/recipes/idontknow_from_smelting_itssomething.json

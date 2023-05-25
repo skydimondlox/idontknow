@@ -19,6 +19,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ModItems.I_DONT_KNOW);
         simpleItem(ModItems.ITS_SOMETHING);
+        simpleItem(ModItems.HOW_BOUT_THIS);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

@@ -1,4 +1,7 @@
-// 1.19.4	2023-05-24T18:20:18.9482004	Block States: idkmod
+// 1.19.4	2023-05-26T08:58:49.633147	Block States: idkmod
 8df0bdc2b7553cef8013c960313eae3783af3acf assets/idkmod/blockstates/idontknowblock.json
+9ee39fdc91e01dd95bf49d18ca320e2cfc0712ce assets/idkmod/blockstates/itsablock.json
 cf412907cf680ac4eae9399af99243d31118fd4f assets/idkmod/models/block/idontknowblock.json
+f63eabdfd2ed2c2bde33307e3e8c83e102cdb145 assets/idkmod/models/block/itsablock.json
 d531b4916d5d58d75fc88379e174acad50b3a19d assets/idkmod/models/item/idontknowblock.json
+9603f4efc5079daa7654fd7677c922bebbdafb10 assets/idkmod/models/item/itsablock.json
