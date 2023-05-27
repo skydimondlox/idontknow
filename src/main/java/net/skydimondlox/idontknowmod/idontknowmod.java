@@ -16,7 +16,6 @@ import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
 import net.skydimondlox.idontknowmod.item.ModItems;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(idontknowmod.MOD_ID)
 public class idontknowmod {
     public static final String MOD_ID = "idkmod";
