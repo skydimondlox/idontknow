@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_itssomething": {
+    "has_deepslateitsanore": {
       "conditions": {
         "items": [
           {
             "items": [
-              "idkmod:itssomething"
+              "idkmod:deepslateitsanore"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:idontknow_from_blasting_itssomething"
+        "recipe": "idkmod:idontknow_from_blasting_deepslateitsanore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_itssomething",
+      "has_deepslateitsanore",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:idontknow_from_blasting_itssomething"
+      "idkmod:idontknow_from_blasting_deepslateitsanore"
     ]
   }
 }

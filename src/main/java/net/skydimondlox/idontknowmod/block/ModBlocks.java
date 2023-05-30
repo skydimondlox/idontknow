@@ -26,6 +26,19 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final  RegistryObject<Block> ITSANORE = registerBlock("itsanore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final  RegistryObject<Block> DEEPSLATEITSANORE = registerBlock("deepslateitsanore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final  RegistryObject<Block> PRESSEDIRONBLOCK = registerBlock("pressedironblock",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

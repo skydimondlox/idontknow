@@ -20,6 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.I_DONT_KNOW);
         simpleItem(ModItems.ITS_SOMETHING);
         simpleItem(ModItems.HOW_BOUT_THIS);
+        simpleItem(ModItems.PRESSEDIRON);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

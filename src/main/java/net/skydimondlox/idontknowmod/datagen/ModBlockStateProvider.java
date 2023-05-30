@@ -17,6 +17,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.IDONTKNOWBLOCK);
         blockWithItem(ModBlocks.ITSABLOCK);
+        blockWithItem(ModBlocks.ITSANORE);
+        blockWithItem(ModBlocks.DEEPSLATEITSANORE);
+        blockWithItem(ModBlocks.PRESSEDIRONBLOCK);
     }
 
     private void blockWithItem(RegistryObject<Block>blockRegistryObject) {

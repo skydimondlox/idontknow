@@ -53,6 +53,10 @@ public class idontknowmod {
             event.accept(ModBlocks.IDONTKNOWBLOCK);
             event.accept(ModBlocks.ITSABLOCK);
             event.accept(ModItems.HOW_BOUT_THIS);
+            event.accept(ModBlocks.ITSANORE);
+            event.accept(ModBlocks.DEEPSLATEITSANORE);
+            event.accept(ModBlocks.PRESSEDIRONBLOCK);
+            event.accept(ModItems.PRESSEDIRON);
         }
     }
 

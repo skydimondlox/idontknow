@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "idkmod:idontknowblock"
+    "idkmod:idontknowblock",
+    "idkmod:itsablock",
+    "idkmod:itsanore",
+    "idkmod:deepslateitsanore",
+    "idkmod:pressedironblock"
   ]
 }

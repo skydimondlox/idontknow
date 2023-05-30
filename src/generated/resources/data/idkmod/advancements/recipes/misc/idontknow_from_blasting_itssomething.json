@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:idontknow_from_smelting_itssomething"
+        "recipe": "idkmod:idontknow_from_blasting_itssomething"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:idontknow_from_smelting_itssomething"
+      "idkmod:idontknow_from_blasting_itssomething"
     ]
   }
 }

@@ -2,9 +2,13 @@
   "item.idkmod.idontknow": "I Don't Know",
   "item.idkmod.itssomething": "It's Something",
   "item.idkmod.howboutthis": "How 'Bout This",
+  "item.idkmod.pressediron": "Pressed Iron",
 
   "block.idkmod.idontknowblock": "Block of I Don't Know",
   "block.idkmod.itsablock": "It's A Block",
+  "block.idkmod.itsanore": "It's An Ore",
+  "block.idkmod.deepslateitsanore": "Deepslate It's An Ore",
+  "block.idkmod.pressedironblock": "Pressed Iron Block",
 
   "creativemodetab.idontknowtab": "I Don't Know Tab"
 
