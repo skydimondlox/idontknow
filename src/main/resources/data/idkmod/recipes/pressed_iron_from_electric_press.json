@@ -1,0 +1,11 @@
+{
+  "type": "idkmod:electric_press",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "idkmod:pressed_iron"
+  }
+}

@@ -3,11 +3,11 @@
   "category": "building",
   "ingredients": [
     {
-      "item": "idkmod:pressedironblock"
+      "item": "idkmod:pressedgoldblock"
     }
   ],
   "result": {
     "count": 9,
-    "item": "idkmod:pressediron"
+    "item": "idkmod:pressed_gold"
   }
 }

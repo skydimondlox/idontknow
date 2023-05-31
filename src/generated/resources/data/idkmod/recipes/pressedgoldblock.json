@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "idkmod:pressed_iron"
+      "item": "idkmod:pressed_gold"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
     "###"
   ],
   "result": {
-    "item": "idkmod:pressedironblock"
+    "item": "idkmod:pressedgoldblock"
   },
   "show_notification": true
 }

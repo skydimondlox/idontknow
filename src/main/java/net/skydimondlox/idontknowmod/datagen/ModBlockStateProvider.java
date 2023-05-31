@@ -20,6 +20,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.ITSANORE);
         blockWithItem(ModBlocks.DEEPSLATEITSANORE);
         blockWithItem(ModBlocks.PRESSEDIRONBLOCK);
+        blockWithItem(ModBlocks.PRESSEDGOLDBLOCK);
+        blockWithItem(ModBlocks.ELECTRIC_PRESS);
     }
 
     private void blockWithItem(RegistryObject<Block>blockRegistryObject) {

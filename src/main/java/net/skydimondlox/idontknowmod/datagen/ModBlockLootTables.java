@@ -21,6 +21,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.IDONTKNOWBLOCK.get());
         dropSelf(ModBlocks.ITSABLOCK.get());
         dropSelf(ModBlocks.PRESSEDIRONBLOCK.get());
+        dropSelf(ModBlocks.PRESSEDGOLDBLOCK.get());
+        dropSelf(ModBlocks.ELECTRIC_PRESS.get());
 
         add(ModBlocks.ITSANORE.get(),
                 (block) -> createOreDrop(ModBlocks.ITSANORE.get(), ModItems.ITS_SOMETHING.get()));

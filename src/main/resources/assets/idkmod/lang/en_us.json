@@ -2,13 +2,21 @@
   "item.idkmod.idontknow": "I Don't Know",
   "item.idkmod.itssomething": "It's Something",
   "item.idkmod.howboutthis": "How 'Bout This",
-  "item.idkmod.pressediron": "Pressed Iron",
+  "item.idkmod.pressed_iron": "Pressed Iron",
+  "item.idkmod.pressed_gold": "Pressed Gold",
+  "item.idkmod.stone_gear": "Stone Gear",
+  "item.idkmod.iron_gear": "Iron Gear",
+  "item.idkmod.gold_gear": "Gold Gear",
+  "item.idkmod.diamond_gear": "Diamond Gear",
+  "item.idkmod.copper_gear": "Copper Gear",
 
   "block.idkmod.idontknowblock": "Block of I Don't Know",
   "block.idkmod.itsablock": "It's A Block",
   "block.idkmod.itsanore": "It's An Ore",
   "block.idkmod.deepslateitsanore": "Deepslate It's An Ore",
   "block.idkmod.pressedironblock": "Pressed Iron Block",
+  "block.idkmod.pressedgoldblock": "Pressed Gold Block",
+  "block.idkmod.electric_press": "Electric Press",
 
   "creativemodetab.idontknowtab": "I Don't Know Tab"
 

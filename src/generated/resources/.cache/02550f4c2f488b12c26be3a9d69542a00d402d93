@@ -1,16 +1,22 @@
-// 1.19.4	2023-05-30T20:42:45.5100283	Block States: idkmod
+// 1.19.4	2023-05-31T12:00:25.5311313	Block States: idkmod
 077a5f221a2b5b84e9b95128edb6f92dad8674a8 assets/idkmod/blockstates/deepslateitsanore.json
+11caf3d02a0dc67d7984851ca07cbf2572bed4fa assets/idkmod/blockstates/electric_press.json
 8df0bdc2b7553cef8013c960313eae3783af3acf assets/idkmod/blockstates/idontknowblock.json
 9ee39fdc91e01dd95bf49d18ca320e2cfc0712ce assets/idkmod/blockstates/itsablock.json
 709fd5d7cb00727d5bd8fdb0219d056bc5b1c906 assets/idkmod/blockstates/itsanore.json
+ac9f63be29b5ffb1a972da44de499827e631a493 assets/idkmod/blockstates/pressedgoldblock.json
 9c01e216216434e0fccd9b63d92f29056cccc81d assets/idkmod/blockstates/pressedironblock.json
 39bee7966cf6f743823d242d08489098e9d53754 assets/idkmod/models/block/deepslateitsanore.json
+4e48b2982b3bd465f64040cc91843ec9492f4267 assets/idkmod/models/block/electric_press.json
 cf412907cf680ac4eae9399af99243d31118fd4f assets/idkmod/models/block/idontknowblock.json
 f63eabdfd2ed2c2bde33307e3e8c83e102cdb145 assets/idkmod/models/block/itsablock.json
 d904f178aaf43d472b75e46c014ee8cac4567468 assets/idkmod/models/block/itsanore.json
+f05646c20869c3519e546e7d247b6e9e806cb801 assets/idkmod/models/block/pressedgoldblock.json
 eb00eea1e73641a5d33f0e32e850086a7fcb6426 assets/idkmod/models/block/pressedironblock.json
 95c37fec4bf198303148ac70e5c76e99d7c275cd assets/idkmod/models/item/deepslateitsanore.json
+6af4e6493ccfe6ae1303d38745c9402229f6bb47 assets/idkmod/models/item/electric_press.json
 d531b4916d5d58d75fc88379e174acad50b3a19d assets/idkmod/models/item/idontknowblock.json
 9603f4efc5079daa7654fd7677c922bebbdafb10 assets/idkmod/models/item/itsablock.json
 ca53553486f70bfb813dcf93621c8354d8f79916 assets/idkmod/models/item/itsanore.json
+a5aab63d6e7de1b62f511fecb1ec19020d562f9b assets/idkmod/models/item/pressedgoldblock.json
 33a76ffa91c3dcb3291fa415d6fa0b4fc579b80e assets/idkmod/models/item/pressedironblock.json

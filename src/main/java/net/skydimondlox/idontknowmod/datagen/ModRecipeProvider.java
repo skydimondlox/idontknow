@@ -1,14 +1,18 @@
 package net.skydimondlox.idontknowmod.datagen;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.idontknowmod;
@@ -31,11 +35,68 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 ModItems.HOW_BOUT_THIS.get());
         nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.PRESSEDIRON.get(), RecipeCategory.MISC,
                 ModBlocks.PRESSEDIRONBLOCK.get());
+        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.PRESSEDGOLD.get(), RecipeCategory.MISC,
+                ModBlocks.PRESSEDGOLDBLOCK.get());
 
         //fourBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.ITS_SOMETHING.get(), RecipeCategory.MISC,
         //        ModBlocks.ITSABLOCK.get());
 
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ELECTRIC_PRESS.get())
+                 .pattern("BIB")
+                 .pattern("IFI")
+                 .pattern("BRB")
+                 .define('F', Ingredient.of(Blocks.FURNACE))
+                 .define('I', Ingredient.of(Items.IRON_INGOT))
+                 .define('R', Ingredient.of(Blocks.REDSTONE_BLOCK))
+                 .define('B', Tags.Items.STONE)
+                 .unlockedBy("has_furnace", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Blocks.FURNACE).build()))
+                 .save(consumer);
 
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.IRON_GEAR.get())
+                 .pattern(" I ")
+                 .pattern("I I")
+                 .pattern(" I ")
+                 .define('I', Ingredient.of(Items.IRON_INGOT))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Items.IRON_INGOT).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GOLD_GEAR.get())
+                 .pattern(" G ")
+                 .pattern("G G")
+                 .pattern(" G ")
+                 .define('G', Ingredient.of(Items.GOLD_INGOT))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Items.GOLD_INGOT).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DIAMOND_GEAR.get())
+                 .pattern(" D ")
+                 .pattern("D D")
+                 .pattern(" D ")
+                 .define('D', Ingredient.of(Items.DIAMOND))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Items.DIAMOND).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.STONE_GEAR.get())
+                 .pattern(" S ")
+                 .pattern("S S")
+                 .pattern(" S ")
+                 .define('S', Ingredient.of(Blocks.STONE))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Blocks.STONE).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_GEAR.get())
+                 .pattern(" C ")
+                 .pattern("C C")
+                 .pattern(" C ")
+                 .define('C', Ingredient.of(Items.COPPER_INGOT))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Items.COPPER_INGOT).build()))
+                 .save(consumer);
 
         twoByTwoPacker(consumer, RecipeCategory.MISC, ModBlocks.ITSABLOCK.get(), ModItems.ITS_SOMETHING.get());
 
@@ -45,6 +106,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(consumer, List.of(ModBlocks.ITSANORE.get()), RecipeCategory.MISC, ModItems.I_DONT_KNOW.get(), 0.7f, 100, "idontknow");
         oreSmelting(consumer, List.of(ModBlocks.DEEPSLATEITSANORE.get()), RecipeCategory.MISC, ModItems.I_DONT_KNOW.get(), 0.7f, 200, "idontknow");
         oreBlasting(consumer, List.of(ModBlocks.DEEPSLATEITSANORE.get()), RecipeCategory.MISC, ModItems.I_DONT_KNOW.get(), 0.7f, 100, "idontknow");
+
 
     }
 
@@ -84,4 +146,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .unlockedBy(getHasName(itemlike), has(itemlike)).save(p_250791_, new ResourceLocation(idontknowmod.MOD_ID, getItemName(p_250066_)) + p_249236_ + "_" + getItemName(itemlike));
         }
     }
+
+    //protected static void pressCrafting(Consumer<FinishedRecipe> consumer, List<ItemLike> output, RecipeCategory category, ItemLike input, )
 }

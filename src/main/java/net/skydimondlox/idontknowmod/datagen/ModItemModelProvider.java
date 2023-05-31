@@ -21,6 +21,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ITS_SOMETHING);
         simpleItem(ModItems.HOW_BOUT_THIS);
         simpleItem(ModItems.PRESSEDIRON);
+        simpleItem(ModItems.PRESSEDGOLD);
+        simpleItem(ModItems.STONE_GEAR);
+        simpleItem(ModItems.IRON_GEAR);
+        simpleItem(ModItems.DIAMOND_GEAR);
+        simpleItem(ModItems.GOLD_GEAR);
+        simpleItem(ModItems.COPPER_GEAR);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

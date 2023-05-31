@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "idkmod:pressed_iron"
+    "G": {
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    " G ",
+    "G G",
+    " G "
   ],
   "result": {
-    "item": "idkmod:pressedironblock"
+    "item": "idkmod:gold_gear"
   },
   "show_notification": true
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pressed_iron": {
+    "has_pressed_gold": {
       "conditions": {
         "items": [
           {
             "items": [
-              "idkmod:pressed_iron"
+              "idkmod:pressed_gold"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "idkmod:pressedironblock"
+        "recipe": "idkmod:pressedgoldblock"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pressed_iron",
+      "has_pressed_gold",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "idkmod:pressedironblock"
+      "idkmod:pressedgoldblock"
     ]
   }
 }

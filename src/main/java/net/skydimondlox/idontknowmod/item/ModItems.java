@@ -20,7 +20,25 @@ public class ModItems {
     public static final RegistryObject<Item> HOW_BOUT_THIS = ITEMS.register("howboutthis",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> PRESSEDIRON = ITEMS.register("pressediron",
+    public static final RegistryObject<Item> PRESSEDIRON = ITEMS.register("pressed_iron",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> PRESSEDGOLD = ITEMS.register("pressed_gold",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GOLD_GEAR = ITEMS.register("gold_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> IRON_GEAR = ITEMS.register("iron_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> DIAMOND_GEAR = ITEMS.register("diamond_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STONE_GEAR = ITEMS.register("stone_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear",
             () -> new Item(new Item.Properties()));
 
 

@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.skydimondlox.idontknowmod.block.custom.ElectricPressBlock;
 import net.skydimondlox.idontknowmod.idontknowmod;
 import net.skydimondlox.idontknowmod.item.ModItems;
 
@@ -37,6 +38,14 @@ public class ModBlocks {
     public static final  RegistryObject<Block> PRESSEDIRONBLOCK = registerBlock("pressedironblock",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final  RegistryObject<Block> PRESSEDGOLDBLOCK = registerBlock("pressedgoldblock",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final  RegistryObject<Block> ELECTRIC_PRESS = registerBlock("electric_press",
+            () -> new ElectricPressBlock(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
 
 
 

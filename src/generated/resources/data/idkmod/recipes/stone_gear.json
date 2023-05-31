@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "idkmod:pressed_iron"
+    "S": {
+      "item": "minecraft:stone"
     }
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    " S ",
+    "S S",
+    " S "
   ],
   "result": {
-    "item": "idkmod:pressedironblock"
+    "item": "idkmod:stone_gear"
   },
   "show_notification": true
 }

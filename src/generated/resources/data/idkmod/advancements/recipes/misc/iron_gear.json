@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pressed_iron": {
+    "has_items": {
       "conditions": {
         "items": [
           {
             "items": [
-              "idkmod:pressed_iron"
+              "minecraft:iron_ingot"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "idkmod:pressedironblock"
+        "recipe": "idkmod:iron_gear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pressed_iron",
+      "has_items",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "idkmod:pressedironblock"
+      "idkmod:iron_gear"
     ]
   }
 }
