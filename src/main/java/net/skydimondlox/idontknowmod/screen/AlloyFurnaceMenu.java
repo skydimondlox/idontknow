@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AlloyFurnaceMenu extends AbstractContainerMenu {
     public final AlloyFurnaceBlockEntity blockEntity;
-    private final Level level;
+    private Level level;
     private final ContainerData data;
 
     public AlloyFurnaceMenu(int id, Inventory inv, FriendlyByteBuf extraData) {

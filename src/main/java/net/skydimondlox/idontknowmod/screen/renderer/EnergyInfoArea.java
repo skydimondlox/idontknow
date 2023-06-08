@@ -34,7 +34,6 @@ public class EnergyInfoArea extends InfoArea {
         return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
     }
 
-    @Override
     public void draw(PoseStack transform) {
         final int height = area.getHeight();
         int stored = (int)(height*(energy.getEnergyStored()/(float)energy.getMaxEnergyStored()));

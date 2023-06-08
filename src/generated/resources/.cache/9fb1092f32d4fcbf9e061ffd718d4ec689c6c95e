@@ -1,10 +1,11 @@
-// 1.19.4	2023-06-05T22:15:01.7771848	Recipes
+// 1.19.4	2023-06-08T19:07:46.5117823	Recipes
 8e692478469d766d5012bf6eb16b54f88571c984 data/idkmod/advancements/recipes/building_blocks/bronze_ingot.json
 e98f3004f176a88ae7336cb14258321f4dbb50ca data/idkmod/advancements/recipes/building_blocks/pressed_gold.json
 ee5a9e9d756faf63d0aa76d14f6147a72f37e4b7 data/idkmod/advancements/recipes/building_blocks/pressed_iron.json
 17d782591abeb8edd6ec644fb4fd929952fb3b33 data/idkmod/advancements/recipes/building_blocks/tin_ingot.json
 e8a9a7e1d2f461ad3a9a9160910914236fbe00fa data/idkmod/advancements/recipes/building_blocks/zinc.json
 9accf8645e709824581f97e40a812ee41434dc62 data/idkmod/advancements/recipes/misc/alloy_furnace.json
+9c1de7feda1b1d5a382465c237b8edca9e198838 data/idkmod/advancements/recipes/misc/amzo_on_a_stick.json
 651eb17ccb2ac0fbfbe7e014d1f98a3a5526f969 data/idkmod/advancements/recipes/misc/bronze_block.json
 55d1ce5fbc9d8639cfd48523ab18f42cbdafcdfc data/idkmod/advancements/recipes/misc/bronze_gear.json
 46e2eadd47ebbac0b88d828ce44189b2d63f4c31 data/idkmod/advancements/recipes/misc/copper_gear.json
@@ -32,6 +33,7 @@ fe3426d08ca0284035b4e57978d135f4c24e4984 data/idkmod/advancements/recipes/misc/z
 6b4217f3c326ea0f6d563f6b7c63ffddb0793dc9 data/idkmod/advancements/recipes/misc/zinc_from_smelting_raw_zinc.json
 74dc39ae8b8a35acc0eb787c2989eb667d224639 data/idkmod/advancements/recipes/misc/zinc_from_smelting_zinc_ore.json
 64926fc7a85e31d9c2b5f5c9a2a6db6a71129db5 data/idkmod/recipes/alloy_furnace.json
+acb5b6274881aba988a26942b935a503166bcca9 data/idkmod/recipes/amzo_on_a_stick.json
 ebe622ecf876d529d30821720e25b9ef2fafa43d data/idkmod/recipes/bronze_block.json
 d5d76e130200ba4bee80d56aa0dbdbc306814c41 data/idkmod/recipes/bronze_gear.json
 2bbf5b98bf02505af4ebd0782edc6ab1810c564f data/idkmod/recipes/bronze_ingot.json

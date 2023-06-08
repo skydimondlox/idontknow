@@ -28,6 +28,19 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
         assignEnergyInfoArea();
     }
 
+    @Override
+    protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
+        renderProgressArrow(pPoseStack, x, y);
+        energyInfoArea.draw(pPoseStack);
+    }
+
     private void assignEnergyInfoArea() {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -35,7 +48,7 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
         energyInfoArea = new EnergyInfoArea(x + 156, y + 13, menu.blockEntity.getEnergyStorage());
     }
 
-    @Override
+
     protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -51,22 +64,9 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
         }
     }
 
-    @Override
-    protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-
-        this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
-        renderProgressArrow(pPoseStack, x, y);
-        energyInfoArea.draw(pPoseStack);
-    }
-
-    private void renderProgressArrow(PoseStack poseStack, int x, int y) {
+    private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if (menu.isCrafting()) {
-            blit(poseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
+            blit(pPoseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
         }
     }
 

@@ -50,13 +50,6 @@ public class idontknowmod {
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
-        if(event.getTab() == CreativeModeTabs.INGREDIENTS) {
-
-        }
-
-        if(event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
-
-        }
 
         if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB) {
             //PRESSED
