@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "idkmod:item/amzo_on_a_stick"
+  }
+}

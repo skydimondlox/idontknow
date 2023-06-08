@@ -16,11 +16,11 @@ import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.block.entity.ModBlockEntities;
 import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
 import net.skydimondlox.idontknowmod.item.ModItems;
+import net.skydimondlox.idontknowmod.networking.ModMessages;
 import net.skydimondlox.idontknowmod.recipe.ModRecipes;
+import net.skydimondlox.idontknowmod.screen.AlloyFurnaceScreen;
 import net.skydimondlox.idontknowmod.screen.ElectricPressScreen;
 import net.skydimondlox.idontknowmod.screen.ModMenuTypes;
-import net.skydimondlox.idontknowmod.worldgen.ModConfiguredFeatures;
-import net.skydimondlox.idontknowmod.worldgen.ModPlacedFeatures;
 import org.slf4j.Logger;
 
 @Mod(idontknowmod.MOD_ID)
@@ -37,9 +37,6 @@ public class idontknowmod {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
 
-        //ModConfiguredFeatures.register(modEventBus);
-        //ModPlacedFeatures.register(modEventBus);
-
         ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
@@ -49,7 +46,7 @@ public class idontknowmod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        ModMessages.register();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
@@ -62,23 +59,38 @@ public class idontknowmod {
         }
 
         if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB) {
-            event.accept(ModItems.I_DONT_KNOW);
-            event.accept(ModItems.ITS_SOMETHING);
-            event.accept(ModBlocks.IDONTKNOWBLOCK);
-            event.accept(ModBlocks.ITSABLOCK);
-            event.accept(ModItems.HOW_BOUT_THIS);
-            event.accept(ModBlocks.ITSANORE);
-            event.accept(ModBlocks.DEEPSLATEITSANORE);
-            event.accept(ModBlocks.PRESSEDIRONBLOCK);
-            event.accept(ModItems.PRESSEDIRON);
-            event.accept(ModItems.PRESSEDGOLD);
+            //PRESSED
+            event.accept(ModBlocks.PRESSED_GOLD_BLOCK);
+            event.accept(ModBlocks.PRESSED_IRON_BLOCK);
+            event.accept(ModItems.PRESSED_IRON);
+            event.accept(ModItems.PRESSED_GOLD);
+            //GEARS
             event.accept(ModItems.STONE_GEAR);
             event.accept(ModItems.IRON_GEAR);
             event.accept(ModItems.GOLD_GEAR);
             event.accept(ModItems.DIAMOND_GEAR);
             event.accept(ModItems.COPPER_GEAR);
-            event.accept(ModBlocks.PRESSEDGOLDBLOCK);
+            event.accept(ModItems.BRONZE_GEAR);
+            //MACHINES
             event.accept(ModBlocks.ELECTRIC_PRESS);
+            event.accept(ModBlocks.ALLOY_FURNACE);
+            //ZINC
+            event.accept(ModBlocks.ZINC_ORE);
+            event.accept(ModBlocks.DEEPSLATE_ZINC_ORE);
+            event.accept(ModBlocks.ZINC_BLOCK);
+            event.accept(ModItems.RAW_ZINC);
+            event.accept(ModItems.ZINC);
+            //BRONZE
+            event.accept(ModItems.BRONZE_INGOT);
+            event.accept(ModBlocks.BRONZE_BLOCK);
+            //TIN
+            event.accept(ModBlocks.DEEPSLATE_TIN_ORE);
+            event.accept(ModBlocks.TIN_ORE);
+            event.accept(ModItems.TIN_INGOT);
+            event.accept(ModItems.RAW_TIN);
+            event.accept(ModBlocks.TIN_BLOCK);
+            //MISC
+            event.accept(ModItems.STONE_STICK);
         }
     }
 
@@ -88,6 +100,7 @@ public class idontknowmod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.ELECTRIC_PRESS_MENU.get(), ElectricPressScreen::new);
+            MenuScreens.register(ModMenuTypes.ALLOY_FURNACE_MENU.get(), AlloyFurnaceScreen::new);
         }
     }
 }

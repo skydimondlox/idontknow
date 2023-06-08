@@ -1,3 +1,5 @@
-// 1.19.4	2023-05-28T16:21:15.4787952	Registries
-61ee286d320b757494bba5e40b1cdf664a6f42b8 data/idkmod/worldgen/configured_feature/itsanore.json
-4c887b319acd30265e62e016f19c5ce9a916a53a data/idkmod/worldgen/placed_feature/itsanore_placed.json
+// 1.19.4	2023-06-04T13:56:42.6927429	Registries
+af9b6c27105caff3129181bfda2f81015c4948f6 data/idkmod/worldgen/configured_feature/tin_ore.json
+97ee9f8eb4b57fbfa53a64d8fc6b6e9bf4440af3 data/idkmod/worldgen/configured_feature/zinc_ore.json
+cb1d08a2ecbceaea56c3fe2042ed7d4daae32778 data/idkmod/worldgen/placed_feature/tin_ore_placed.json
+1900bac6094623960e2385d88156ecbc46f7956d data/idkmod/worldgen/placed_feature/zinc_ore_placed.json

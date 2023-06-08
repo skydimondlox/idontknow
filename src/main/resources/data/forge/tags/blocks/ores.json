@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "idkmod:itsanore",
-    "idkmod:deepslateitsanore"
+    "idkmod:deepslateitsanore",
+    "idkmod:zinc_ore",
+    "idkmod:deepslate_zinc_ore",
+    "idkmod:tin_ore",
+    "idkmod:deepslate_tin_ore"
   ]
 }

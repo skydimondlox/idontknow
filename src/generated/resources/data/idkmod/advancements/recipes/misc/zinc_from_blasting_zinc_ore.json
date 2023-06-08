@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "idkmod:zinc_from_blasting_zinc_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_zinc_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "idkmod:zinc_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_ore",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "idkmod:zinc_from_blasting_zinc_ore"
+    ]
+  }
+}

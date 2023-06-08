@@ -9,6 +9,14 @@
   "item.idkmod.gold_gear": "Gold Gear",
   "item.idkmod.diamond_gear": "Diamond Gear",
   "item.idkmod.copper_gear": "Copper Gear",
+  "item.idkmod.zinc": "Zinc Ingot",
+  "item.idkmod.raw_zinc": "Raw Zinc",
+  "item.idkmod.bronze_ingot": "Bronze Ingot",
+  "item.idkmod.bronze_gear": "Bronze Gear",
+  "item.idkmod.tin_ingot": "Tin Ingot",
+  "item.idkmod.raw_tin": "Raw Tin",
+  "item.idkmod.stone_stick": "Stone Stick",
+  "item.idkmod.amzo_on_a_stick": "Stickzo",
 
   "block.idkmod.idontknowblock": "Block of I Don't Know",
   "block.idkmod.itsablock": "It's A Block",
@@ -17,6 +25,14 @@
   "block.idkmod.pressedironblock": "Pressed Iron Block",
   "block.idkmod.pressedgoldblock": "Pressed Gold Block",
   "block.idkmod.electric_press": "Electric Press",
+  "block.idkmod.alloy_furnace": "Alloy Furnace",
+  "block.idkmod.zinc_ore": "Zinc Ore",
+  "block.idkmod.deepslate_zinc_ore": "Deepslate Zinc Ore",
+  "block.idkmod.zinc_block": "Block Of Zinc",
+  "block.idkmod.bronze_block": "Block Of Bronze",
+  "block.idkmod.tin_ore": "Tin Ore",
+  "block.idkmod.deepslate_tin_ore": "Deepslate Tin Ore",
+  "block.idkmod.tin_block": "Block Of Tin",
 
   "creativemodetab.idontknowtab": "I Don't Know Tab"
 

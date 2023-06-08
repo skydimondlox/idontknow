@@ -1,4 +1,7 @@
-// 1.19.4	2023-05-31T18:18:54.8132708	Item Models: idkmod
+// 1.19.4	2023-06-07T11:34:13.0717785	Item Models: idkmod
+a554854b022f016648ea3af22a49fc529c5ccf2f assets/idkmod/models/item/amzo_on_a_stick.json
+174e0cdba59f88464eaf7670352db07b14336e9b assets/idkmod/models/item/bronze_gear.json
+eee8ed0e366d260a04036e1d83b854a050abe251 assets/idkmod/models/item/bronze_ingot.json
 1c6c3aea07f252bc138dd7a5e4a5836938460a7e assets/idkmod/models/item/copper_gear.json
 7437374ef3b082b02bbadb1225a2cede55193c5e assets/idkmod/models/item/diamond_gear.json
 ed97fc07d2ab11eb7bba30372d5e56e3bf7c9040 assets/idkmod/models/item/gold_gear.json
@@ -8,4 +11,9 @@ e42af608627711b461593504005ef24140ba4e76 assets/idkmod/models/item/iron_gear.jso
 0361112355ee8bec4667b4f3b77045e406d5669f assets/idkmod/models/item/itssomething.json
 f0df4a30040bbe6c9fc667b5f45182e0ecb776c3 assets/idkmod/models/item/pressed_gold.json
 6c2c87d1e2a4ec4ae03d64af389502c94ade723f assets/idkmod/models/item/pressed_iron.json
+8a2f1fd20318db4fe2cded129fb715ab880efe3a assets/idkmod/models/item/raw_tin.json
+0998b90e1dabce829be448dce9148f735a4e8847 assets/idkmod/models/item/raw_zinc.json
 db7635b8f2d47b86b95edc1f637dc33e129565e5 assets/idkmod/models/item/stone_gear.json
+69cd6ab2384fbf5ecd32f8a60e33cb37e441ea16 assets/idkmod/models/item/stone_stick.json
+f1c1792ba76e88fa169cba4017f7d54469919f80 assets/idkmod/models/item/tin_ingot.json
+cccb23a5f30b769ffae8274a8fb91be3acd20388 assets/idkmod/models/item/zinc.json

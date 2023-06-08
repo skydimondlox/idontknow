@@ -20,14 +20,26 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.IDONTKNOWBLOCK.get());
         dropSelf(ModBlocks.ITSABLOCK.get());
-        dropSelf(ModBlocks.PRESSEDIRONBLOCK.get());
-        dropSelf(ModBlocks.PRESSEDGOLDBLOCK.get());
+        dropSelf(ModBlocks.PRESSED_IRON_BLOCK.get());
+        dropSelf(ModBlocks.PRESSED_GOLD_BLOCK.get());
         dropSelf(ModBlocks.ELECTRIC_PRESS.get());
+        dropSelf(ModBlocks.ZINC_BLOCK.get());
+        dropSelf(ModBlocks.BRONZE_BLOCK.get());
+        dropSelf(ModBlocks.ALLOY_FURNACE.get());
+        dropSelf(ModBlocks.TIN_BLOCK.get());
 
         add(ModBlocks.ITSANORE.get(),
                 (block) -> createOreDrop(ModBlocks.ITSANORE.get(), ModItems.ITS_SOMETHING.get()));
         add(ModBlocks.DEEPSLATEITSANORE.get(),
                 (block) -> createOreDrop(ModBlocks.DEEPSLATEITSANORE.get(), ModItems.ITS_SOMETHING.get()));
+        add(ModBlocks.DEEPSLATE_ZINC_ORE.get(),
+                (block) -> createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
+        add(ModBlocks.ZINC_ORE.get(),
+                (block) -> createOreDrop(ModBlocks.ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
+        add(ModBlocks.TIN_ORE.get(),
+                (block) -> createOreDrop(ModBlocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        add(ModBlocks.DEEPSLATE_TIN_ORE.get(),
+                (block) -> createOreDrop(ModBlocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
     }
 
     @Override

@@ -20,10 +20,10 @@ public class ModItems {
     public static final RegistryObject<Item> HOW_BOUT_THIS = ITEMS.register("howboutthis",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> PRESSEDIRON = ITEMS.register("pressed_iron",
+    public static final RegistryObject<Item> PRESSED_IRON = ITEMS.register("pressed_iron",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> PRESSEDGOLD = ITEMS.register("pressed_gold",
+    public static final RegistryObject<Item> PRESSED_GOLD = ITEMS.register("pressed_gold",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> GOLD_GEAR = ITEMS.register("gold_gear",
@@ -39,6 +39,30 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> RAW_ZINC = ITEMS.register("raw_zinc",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ZINC = ITEMS.register("zinc",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BRONZE_GEAR = ITEMS.register("bronze_gear",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STONE_STICK = ITEMS.register("stone_stick",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> AMZO_STICK = ITEMS.register("amzo_on_a_stick",
             () -> new Item(new Item.Properties()));
 
 

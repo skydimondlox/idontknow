@@ -13,6 +13,8 @@ public class ModRecipes {
 
         public static final RegistryObject<RecipeSerializer<ElectricPressRecipe>> ELECTRIC_PRESS_SERIALIZER =
                 SERIALIZERS.register("electric_press", () -> ElectricPressRecipe.Serializer.INSTANCE);
+        public static final RegistryObject<RecipeSerializer<AlloyFurnaceRecipe>> ALLOY_FURNACE_SERIALIZER =
+                SERIALIZERS.register("alloy_furnace", () -> AlloyFurnaceRecipe.Serializer.INSTANCE);
 
         public static void register(IEventBus eventBus) {
             SERIALIZERS.register(eventBus);

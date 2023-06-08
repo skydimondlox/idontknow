@@ -8,10 +8,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.skydimondlox.idontknowmod.idontknowmod;
+import net.skydimondlox.idontknowmod.screen.renderer.EnergyInfoArea;
+import net.skydimondlox.idontknowmod.util.MouseUtil;
+
+import java.util.Optional;
 
 public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(idontknowmod.MOD_ID, "textures/gui/electric_press_gui.png");
+    private EnergyInfoArea energyInfoArea;
 
     public ElectricPressScreen(ElectricPressMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -20,6 +25,30 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
     @Override
     protected void init() {
         super.init();
+        assignEnergyInfoArea();
+    }
+
+    private void assignEnergyInfoArea() {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        energyInfoArea = new EnergyInfoArea(x + 156, y + 13, menu.blockEntity.getEnergyStorage());
+    }
+
+    @Override
+    protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        renderEnergyAreaTooltips(pPoseStack, pMouseX, pMouseY, x, y);
+
+    }
+
+    private void renderEnergyAreaTooltips(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+            renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
     }
 
     @Override
@@ -32,6 +61,7 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
 
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
         renderProgressArrow(pPoseStack, x, y);
+        energyInfoArea.draw(pPoseStack);
     }
 
     private void renderProgressArrow(PoseStack poseStack, int x, int y) {
@@ -45,5 +75,9 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
         renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pPoseStack, pMouseX, pMouseY);
+    }
+
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

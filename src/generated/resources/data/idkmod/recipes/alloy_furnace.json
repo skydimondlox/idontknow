@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "E": {
+      "item": "idkmod:electric_press"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "Z": {
+      "item": "idkmod:zinc"
+    }
+  },
+  "pattern": [
+    "ZRZ",
+    "RER",
+    "ZBZ"
+  ],
+  "result": {
+    "item": "idkmod:alloy_furnace"
+  },
+  "show_notification": true
+}

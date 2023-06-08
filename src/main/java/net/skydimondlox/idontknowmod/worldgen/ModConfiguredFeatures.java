@@ -18,17 +18,23 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ITSANORE_KEY = registerKey("itsanore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ZINC_ORE_KEY = registerKey("zinc_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIN_ORE_KEY = registerKey("tin_ore");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
-        List<OreConfiguration.TargetBlockState> overworlditsanoreOres = List.of(OreConfiguration.target(stoneReplaceables,
-                ModBlocks.ITSANORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATEITSANORE.get().defaultBlockState()));
+        List<OreConfiguration.TargetBlockState> overworldzincOres = List.of(OreConfiguration.target(stoneReplaceables,
+                ModBlocks.ZINC_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_ZINC_ORE.get().defaultBlockState()));
 
-        register(context, OVERWORLD_ITSANORE_KEY, Feature.ORE, new OreConfiguration(overworlditsanoreOres, 9));
+        List<OreConfiguration.TargetBlockState> overworldtinOres = List.of(OreConfiguration.target(stoneReplaceables,
+                ModBlocks.TIN_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_TIN_ORE.get().defaultBlockState()));
+
+        register(context, OVERWORLD_ZINC_ORE_KEY, Feature.ORE, new OreConfiguration(overworldzincOres, 9));
+        register(context, OVERWORLD_TIN_ORE_KEY, Feature.ORE, new OreConfiguration(overworldtinOres, 9));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

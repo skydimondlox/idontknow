@@ -1,0 +1,14 @@
+{
+  "type": "idkmod:alloy_furnace",
+  "ingredients": [
+    {
+      "item": "idkmod:tin_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "output": {
+    "item": "idkmod:bronze_ingot"
+  }
+}

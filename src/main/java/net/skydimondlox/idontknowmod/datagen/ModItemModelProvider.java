@@ -20,13 +20,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.I_DONT_KNOW);
         simpleItem(ModItems.ITS_SOMETHING);
         simpleItem(ModItems.HOW_BOUT_THIS);
-        simpleItem(ModItems.PRESSEDIRON);
-        simpleItem(ModItems.PRESSEDGOLD);
+        simpleItem(ModItems.PRESSED_IRON);
+        simpleItem(ModItems.PRESSED_GOLD);
         simpleItem(ModItems.STONE_GEAR);
         simpleItem(ModItems.IRON_GEAR);
         simpleItem(ModItems.DIAMOND_GEAR);
         simpleItem(ModItems.GOLD_GEAR);
         simpleItem(ModItems.COPPER_GEAR);
+        simpleItem(ModItems.RAW_ZINC);
+        simpleItem(ModItems.ZINC);
+        simpleItem(ModItems.BRONZE_INGOT);
+        simpleItem(ModItems.BRONZE_GEAR);
+        simpleItem(ModItems.TIN_INGOT);
+        simpleItem(ModItems.RAW_TIN);
+        handheldItem(ModItems.STONE_STICK);
+        handheldItem(ModItems.AMZO_STICK);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

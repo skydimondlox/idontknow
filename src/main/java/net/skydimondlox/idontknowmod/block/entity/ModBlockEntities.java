@@ -18,6 +18,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(ElectricPressBlockEntity::new,
                             ModBlocks.ELECTRIC_PRESS.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<AlloyFurnaceBlockEntity>> ALLOY_FURNACE =
+            BLOCK_ENTITIES.register("alloy_furnace", () ->
+                    BlockEntityType.Builder.of(AlloyFurnaceBlockEntity::new,
+                            ModBlocks.ALLOY_FURNACE.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

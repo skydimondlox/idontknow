@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "pattern": [
+    " C ",
+    " C "
+  ],
+  "result": {
+    "item": "idkmod:stone_stick"
+  },
+  "show_notification": true
+}

@@ -11,24 +11,24 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.ItemStackHandler;
-import net.skydimondlox.idontknowmod.item.ModItems;
+import net.skydimondlox.idontknowmod.networking.ModMessages;
+import net.skydimondlox.idontknowmod.networking.packet.EnergySyncS2CPacket;
 import net.skydimondlox.idontknowmod.recipe.ElectricPressRecipe;
 import net.skydimondlox.idontknowmod.screen.ElectricPressMenu;
+import net.skydimondlox.idontknowmod.util.ModEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.util.Optional;
 
 public class ElectricPressBlockEntity extends BlockEntity implements MenuProvider {
@@ -39,7 +39,20 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
         }
     };
 
+    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(60000, 256) {
+        @Override
+        public void onEnergyChanged() {
+            setChanged();
+            ModMessages.sendToClients(new EnergySyncS2CPacket(this.energy, getBlockPos()));
+        }
+    };
+    private static final int  ENERGY_REQ = 32;
+
+
+
     private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.empty();
+
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
@@ -83,8 +96,21 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
         return new ElectricPressMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+
+    public void setEnergyLevel(int energy) {
+        this.ENERGY_STORAGE.setEnergy(energy);
+    }
+
+
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if(cap == ForgeCapabilities.ENERGY) {
+            return lazyEnergyHandler.cast();
+        }
+
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
@@ -96,18 +122,21 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyEnergyHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("electric_press_progress", this.progress);
+        pTag.putInt("electric_press.energy", ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(pTag);
     }
@@ -117,6 +146,7 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("electric_press_progress");
+        ENERGY_STORAGE.setEnergy(pTag.getInt("electric_press.energy"));
     }
 
     public void drops() {
@@ -133,8 +163,13 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
             return;
         }
 
-        if(hasRecipe(entity)) {
+        if(hasRedstoneInFirstSlot(entity)) {
+            entity.ENERGY_STORAGE.receiveEnergy(64, false);
+        }
+
+        if(hasRecipe(entity) && hasEnoughEnergy(entity)) {
             entity.progress++;
+            extractEnergy(entity);
             setChanged(level, blockPos, state);
 
             if(entity.progress >= entity.maxProgress) {
@@ -145,6 +180,18 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
             setChanged(level, blockPos, state);
         }
 
+    }
+
+    private static void extractEnergy(ElectricPressBlockEntity entity) {
+        entity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+    }
+
+    private static boolean hasEnoughEnergy(ElectricPressBlockEntity entity) {
+        return entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ * entity.maxProgress;
+    }
+
+    private static boolean hasRedstoneInFirstSlot(ElectricPressBlockEntity entity) {
+        return entity.itemHandler.getStackInSlot(0).getItem() == Items.REDSTONE;
     }
 
     private void resetProgress() {
@@ -193,4 +240,5 @@ public class ElectricPressBlockEntity extends BlockEntity implements MenuProvide
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
     }
+
 }
