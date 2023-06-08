@@ -63,7 +63,7 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
         renderProgressArrow(pPoseStack, x, y);
         energyInfoArea.draw(pPoseStack);
     }
-
+//hi
     private void renderProgressArrow(PoseStack poseStack, int x, int y) {
         if (menu.isCrafting()) {
             blit(poseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
