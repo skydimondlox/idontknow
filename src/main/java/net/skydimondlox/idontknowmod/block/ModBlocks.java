@@ -3,6 +3,7 @@ package net.skydimondlox.idontknowmod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +15,7 @@ import net.skydimondlox.idontknowmod.block.custom.ElectricPressBlock;
 import net.skydimondlox.idontknowmod.idontknowmod;
 import net.skydimondlox.idontknowmod.item.ModItems;
 
+import java.util.Properties;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -21,12 +23,11 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, idontknowmod.MOD_ID);
 
     public static final  RegistryObject<Block> IDONTKNOWBLOCK = registerBlock("idontknowblock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
-                    .strength(6f).requiresCorrectToolForDrops()));
+            () -> new Block(Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
     public static final  RegistryObject<Block> ITSABLOCK = registerBlock("itsablock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.WOOD)
-                    .strength(6f).requiresCorrectToolForDrops()));
+            () -> new Block(BlockBehaviour.Properties.of().strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> ITSANORE = registerBlock("itsanore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)

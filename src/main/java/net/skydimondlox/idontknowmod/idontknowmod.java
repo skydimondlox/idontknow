@@ -2,11 +2,9 @@ package net.skydimondlox.idontknowmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,13 +49,6 @@ public class idontknowmod {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTab() == CreativeModeTabs.INGREDIENTS) {
-
-        }
-
-        if(event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
-
-        }
 
         if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB) {
             //PRESSED

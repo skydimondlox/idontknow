@@ -1,6 +1,7 @@
 package net.skydimondlox.idontknowmod.screen.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -34,7 +35,7 @@ public class EnergyInfoArea extends InfoArea {
         return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
     }
 
-    @Override
+
     public void draw(PoseStack transform) {
         final int height = area.getHeight();
         int stored = (int)(height*(energy.getEnergyStored()/(float)energy.getMaxEnergyStored()));
