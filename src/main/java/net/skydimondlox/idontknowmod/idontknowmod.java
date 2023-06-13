@@ -2,6 +2,7 @@ package net.skydimondlox.idontknowmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -50,7 +51,11 @@ public class idontknowmod {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
-        if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB) {
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+
+        }
+
+        if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB.get()) {
             //PRESSED
             event.accept(ModBlocks.PRESSED_GOLD_BLOCK);
             event.accept(ModBlocks.PRESSED_IRON_BLOCK);
