@@ -1,5 +1,6 @@
 package net.skydimondlox.idontknowmod.item;
 
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -62,8 +63,12 @@ public class ModItems {
     public static final RegistryObject<Item> STONE_STICK = ITEMS.register("stone_stick",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> AMZO_STICK = ITEMS.register("amzo_on_a_stick",
+    public static final RegistryObject<Item> BRONZE_ROD = ITEMS.register("bronze_rod",
             () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> IRON_ROD = ITEMS.register("iron_rod",
+            () -> new Item(new Item.Properties()));
+
 
 
     public static void register(IEventBus eventBus) {

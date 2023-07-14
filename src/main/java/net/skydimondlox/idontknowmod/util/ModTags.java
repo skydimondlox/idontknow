@@ -41,6 +41,8 @@ public class ModTags {
         public static final TagKey<Item> GEARS_DIAMOND = forgeTag("gears/diamond");
         public static final TagKey<Item> GEARS_BRONZE = forgeTag("gears/bronze");
         public static final TagKey<Item> GEARS_COPPER = forgeTag("gears/copper");
+        public static final TagKey<Item> RODS_BRONZE = tag("rods/bronze");
+        public static final TagKey<Item> RODS_IRON = forgeTag("rods/iron");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(idontknowmod.MOD_ID, name));

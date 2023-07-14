@@ -4,6 +4,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,6 +16,7 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.idontknowmod;
 import net.skydimondlox.idontknowmod.item.ModItems;
+import net.skydimondlox.idontknowmod.util.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -57,7 +59,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                  .define('E', Ingredient.of(ModBlocks.ELECTRIC_PRESS.get()))
                  .define('R', Ingredient.of(Items.REDSTONE))
                  .define('Z', Ingredient.of(ModItems.ZINC.get()))
-                 .define('B', Ingredient.of(Blocks.IRON_BLOCK))
+                 .define('B', Ingredient.of(ModTags.Items.GEARS_IRON))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
                          .of(ModBlocks.ELECTRIC_PRESS.get()).build()))
                  .save(consumer);
@@ -124,13 +126,53 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .of(Blocks.COBBLESTONE).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.AMZO_STICK.get())
-                 .pattern(" C ")
-                 .pattern(" S ")
-                 .define('C', Ingredient.of(Blocks.f_271304_))
-                 .define('S', Ingredient.of(Items.STICK))
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BRONZE_ROD.get())
+                 .pattern(" B ")
+                 .pattern(" B ")
+                 .define('B', Ingredient.of(ModItems.BRONZE_INGOT.get()))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(Blocks.f_271304_).build()))
+                         .of(ModItems.BRONZE_INGOT.get()).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.IRON_ROD.get())
+                 .pattern(" I ")
+                 .pattern(" I ")
+                 .define('I', Ingredient.of(Items.IRON_INGOT))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Items.IRON_INGOT).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_BASIC.get())
+                 .pattern("@$@")
+                 .pattern("$#$")
+                 .pattern("@$@")
+                 .define('#', Ingredient.of(ModTags.Items.GEARS_IRON))
+                 .define('$', Ingredient.of(ItemTags.PLANKS))
+                 .define('@', Ingredient.of(ItemTags.STONE_CRAFTING_MATERIALS))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(ModTags.Items.GEARS_IRON).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_INTERMEDIATE.get())
+                 .pattern("@$@")
+                 .pattern("$#$")
+                 .pattern("@$@")
+                 .define('#', Ingredient.of(ModBlocks.MACHINE_FRAME_BASIC.get()))
+                 .define('$', Ingredient.of(Tags.Items.INGOTS_IRON))
+                 .define('@', Ingredient.of(ModTags.Items.STORAGE_BLOCKS_ZINC))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(ModBlocks.MACHINE_FRAME_BASIC.get()).build()))
+                 .save(consumer);
+
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_ADVANCED.get())
+                 .pattern("@$@")
+                 .pattern("$#$")
+                 .pattern("@$@")
+                 .define('#', Ingredient.of(ModBlocks.MACHINE_FRAME_INTERMEDIATE.get()))
+                 .define('$', Ingredient.of(Tags.Items.GEMS_DIAMOND))
+                 .define('@', Ingredient.of(Tags.Items.STORAGE_BLOCKS_DIAMOND))
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(ModBlocks.MACHINE_FRAME_INTERMEDIATE.get()).build()))
                  .save(consumer);
 
          ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 9)

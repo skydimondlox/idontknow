@@ -79,6 +79,17 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> MACHINE_FRAME_BASIC = registerBlock("machine_frame_basic",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> MACHINE_FRAME_INTERMEDIATE = registerBlock("machine_frame_intermediate",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .strength(4f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> MACHINE_FRAME_ADVANCED = registerBlock("machine_frame_advanced",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .strength(4f).requiresCorrectToolForDrops()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

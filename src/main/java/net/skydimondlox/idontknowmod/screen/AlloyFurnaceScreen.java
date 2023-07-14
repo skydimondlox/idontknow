@@ -1,7 +1,6 @@
 package net.skydimondlox.idontknowmod.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -10,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.skydimondlox.idontknowmod.idontknowmod;
 import net.skydimondlox.idontknowmod.screen.renderer.EnergyInfoArea;
+import net.skydimondlox.idontknowmod.screen.renderer.TooltipArea;
 import net.skydimondlox.idontknowmod.util.MouseUtil;
 
 import java.util.Optional;
@@ -42,18 +42,17 @@ public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceMenu
         energyInfoArea = new EnergyInfoArea(x + 156, y + 13, menu.blockEntity.getEnergyStorage());
     }
 
-    protected void renderLabels(GuiGraphics guiGraphics, int x, int y) {
-        super.renderLabels(guiGraphics, x, y);
+    protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        renderEnergyAreaTooltips(guiGraphics, x, y, x, y);
+        renderEnergyAreaTooltips(guiGraphics, pMouseX, pMouseY, x, y);
 
     }
 
     private void renderEnergyAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
-            renderTooltip(guiGraphics, energyInfoArea.getTooltips(),
+            renderTooltip(guiGraphics, TooltipArea(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }

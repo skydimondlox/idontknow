@@ -47,6 +47,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     private static final int  ENERGY_REQ = 32;
+    public static final int NUM_SLOTS = 7;
+    public static final int ENERGY_CAPACITY = 16000;
 
 
 

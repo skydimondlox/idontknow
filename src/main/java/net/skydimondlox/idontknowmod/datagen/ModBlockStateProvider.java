@@ -30,6 +30,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.TIN_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_TIN_ORE);
         blockWithItem(ModBlocks.TIN_BLOCK);
+        blockWithItem(ModBlocks.MACHINE_FRAME_ADVANCED);
+        blockWithItem(ModBlocks.MACHINE_FRAME_INTERMEDIATE);
+        blockWithItem(ModBlocks.MACHINE_FRAME_BASIC);
     }
 
     private void blockWithItem(RegistryObject<Block>blockRegistryObject) {

@@ -1,121 +1,78 @@
 package net.skydimondlox.idontknowmod.screen;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
-import net.skydimondlox.idontknowmod.block.ModBlocks;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.skydimondlox.idontknowmod.api.energy.MutableEnergyStorage;
 import net.skydimondlox.idontknowmod.block.entity.AlloyFurnaceBlockEntity;
-import org.jetbrains.annotations.Nullable;
+import net.skydimondlox.idontknowmod.screen.sync.GenericContainerData;
+import net.skydimondlox.idontknowmod.screen.sync.GenericDataSerializers;
+import net.skydimondlox.idontknowmod.screen.sync.GetterAndSetter;
 
-public class AlloyFurnaceMenu extends AbstractContainerMenu {
-    public final AlloyFurnaceBlockEntity blockEntity;
-    private final Level level;
-    private final ContainerData data;
+import static net.skydimondlox.idontknowmod.block.entity.AlloyFurnaceBlockEntity.*;
 
-    public AlloyFurnaceMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.getLevel().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+public class AlloyFurnaceMenu extends ContainerMenu
+{
+    public final EnergyStorage energyStorage;
+    public final GetterAndSetter<Float> guiProgress;
+
+    public static AlloyFurnaceMenu makeServer(
+            MenuType<?> type, int id, Inventory invPlayer, AlloyFurnaceBlockEntity be
+    )
+    {
+        return new AlloyFurnaceMenu(
+                blockCtx(type, id, be), invPlayer, new ItemStackHandler(be.getInventory()),
+                be.energyStorage,
+                GetterAndSetter.getterOnly(be::getGuiProgress)
+        );
     }
 
-    public AlloyFurnaceMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.ALLOY_FURNACE_MENU.get(), id);
-        checkContainerSize(inv,4);
-        blockEntity = (AlloyFurnaceBlockEntity) entity;
-        this.level = inv.player.getLevel();
-        this.data = data;
-
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
-
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 54, 24));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 106, 24));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 80, 61));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 133, 61));
-        });
-
-        addDataSlots(data);
+    public static AlloyFurnaceMenu makeClient(MenuType<?> type, int id, Inventory invPlayer)
+    {
+        return new AlloyFurnaceMenu(
+                clientCtx(type, id), invPlayer, new ItemStackHandler(NUM_SLOTS),
+                new MutableEnergyStorage(ENERGY_CAPACITY), GetterAndSetter.standalone(0f),
+                GetterAndSetter.standalone(0f)
+        );
     }
 
-    public boolean isCrafting() {
-        return data.get(0) > 0;
+    private AlloyFurnaceMenu(
+            MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv,
+            MutableEnergyStorage energyStorage, FluidTank tank,
+            GetterAndSetter<Float> guiProgress
+    )
+    {
+        super(ctx);
+        this.energyStorage = energyStorage;
+        this.guiProgress = guiProgress;
+        Level level = inventoryPlayer.player.level;
+        for(int i = 0; i < 4; i++)
+            this.addSlot(new Slot.NewOutput(inv, 3+i, 116+i%2*18, 34+i/2*18)
+            {
+                @Override
+                public void onTake(Player pPlayer, ItemStack pStack)
+                {
+                    super.onTake(pPlayer, pStack);
+                    if(pStack.getItem()==Items.CHORUS_FRUIT
+                }
+            });
+
+        this.ownSlotCount = 7;
+
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 9; j++)
+                addSlot(new Slot(inventoryPlayer, j+i*9+9, 8+j*18, 85+i*18));
+        for(int i = 0; i < 9; i++)
+            addSlot(new Slot(inventoryPlayer, i, 8+i*18, 143));
+        addGenericData(GenericContainerData.energy(energyStorage));
+        addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, guiProgress));
     }
-
-    public AlloyFurnaceBlockEntity getBlockEntity() {
-        return this.blockEntity;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        int progressArrowSize = 31;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-
-    private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;
-
-    @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        Slot sourceSlot = slots.get(index);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
-        ItemStack sourceStack = sourceSlot.getItem();
-        ItemStack copyOfSourceStack = sourceStack.copy();
-
-        if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else {
-            System.out.println("Invalid slotIndex:" + index);
-            return ItemStack.EMPTY;
-        }
-        if (sourceStack.getCount() == 0) {
-            sourceSlot.set(ItemStack.EMPTY);
-        } else  {
-            sourceSlot.setChanged();
-        }
-        sourceSlot.onTake(playerIn, sourceStack);
-        return copyOfSourceStack;
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.ALLOY_FURNACE.get());
-    }
-
-    private void addPlayerInventory(Inventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 85  + i * 18));
-            }
-        }
-    }
-
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
-        }
-    }
-
 }

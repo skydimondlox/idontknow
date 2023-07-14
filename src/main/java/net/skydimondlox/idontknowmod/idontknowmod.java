@@ -2,6 +2,7 @@ package net.skydimondlox.idontknowmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +13,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
+import net.skydimondlox.idontknowmod.api.API;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.block.entity.ModBlockEntities;
 import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
@@ -23,13 +27,24 @@ import net.skydimondlox.idontknowmod.screen.ElectricPressScreen;
 import net.skydimondlox.idontknowmod.screen.ModMenuTypes;
 import org.slf4j.Logger;
 
+
 @Mod(idontknowmod.MOD_ID)
 public class idontknowmod {
     public static final String MOD_ID = "idkmod";
+    public static final String VERSION = API.getCurrentVersion();
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
+            .named(new ResourceLocation(MOD_ID, "main"))
+            .networkProtocolVersion(() -> VERSION)
+            .serverAcceptedVersions(VERSION::equals)
+            .clientAcceptedVersions(VERSION::equals)
+            .simpleChannel();
 
     public idontknowmod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -79,6 +94,7 @@ public class idontknowmod {
             event.accept(ModItems.ZINC);
             //BRONZE
             event.accept(ModItems.BRONZE_INGOT);
+            event.accept(ModItems.BRONZE_ROD);
             event.accept(ModBlocks.BRONZE_BLOCK);
             //TIN
             event.accept(ModBlocks.DEEPSLATE_TIN_ORE);
@@ -88,6 +104,11 @@ public class idontknowmod {
             event.accept(ModBlocks.TIN_BLOCK);
             //MISC
             event.accept(ModItems.STONE_STICK);
+            event.accept(ModItems.IRON_ROD);
+            //MACHINE FRAMES
+            event.accept(ModBlocks.MACHINE_FRAME_ADVANCED);
+            event.accept(ModBlocks.MACHINE_FRAME_BASIC);
+            event.accept(ModBlocks.MACHINE_FRAME_INTERMEDIATE);
         }
     }
 
