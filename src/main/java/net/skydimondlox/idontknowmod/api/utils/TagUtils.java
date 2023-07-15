@@ -108,11 +108,6 @@ public class TagUtils
         return TagKey.create(Registry.BLOCK_REGISTRY, name);
     }
 
-    public static TagKey<Fluid> createFluidWrapper(ResourceLocation name)
-    {
-        return TagKey.create(Registry.FLUID_REGISTRY, name);
-    }
-
     public static TagKey<EntityType<?>> createEntityWrapper(ResourceLocation name)
     {
         return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, name);

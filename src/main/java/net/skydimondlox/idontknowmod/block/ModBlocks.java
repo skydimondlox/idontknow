@@ -43,13 +43,13 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final  RegistryObject<Block> ELECTRIC_PRESS = registerBlock("electric_press",
-            () -> new ElectricPressBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                    .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
+//    public static final  RegistryObject<Block> ELECTRIC_PRESS = registerBlock("electric_press",
+//            () -> new ElectricPressBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+//                    .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
 
-    public static final  RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace",
-            () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                    .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
+//    public static final  RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace",
+//            () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+//                    .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final  RegistryObject<Block> ZINC_ORE = registerBlock("zinc_ore",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)

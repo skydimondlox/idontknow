@@ -29,6 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.skydimondlox.idontknowmod.api.Enums.IOSideConfig;
 import net.skydimondlox.idontknowmod.api.Properties;
+import net.skydimondlox.idontknowmod.register.MenuTypes.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -172,7 +173,6 @@ public class BlockInterfaces
 
         default ItemStack getPickBlock(@Nullable Player player, BlockState state, HitResult rayRes)
         {
-            //TODO make this work properly on the client side
             BlockEntity tile = (BlockEntity)this;
             if(!(tile.getLevel() instanceof ServerLevel world))
                 return new ItemStack(state.getBlock());
@@ -198,7 +198,6 @@ public class BlockInterfaces
 
     public interface IPlayerInteraction
     {
-        //TODO should really return ActionResultType
         boolean interact(Direction side, Player player, InteractionHand hand, ItemStack heldItem, float hitX, float hitY, float hitZ);
     }
 
@@ -287,33 +286,7 @@ public class BlockInterfaces
         VoxelShape getCollisionShape(CollisionContext ctx);
     }
 
-    //TODO move a lot of this to block states!
-    public interface IHasDummyBlocks extends IGeneralMultiblock
-    {
-        void placeDummies(BlockPlaceContext ctx, BlockState state);
-
-        void breakDummies(BlockPos pos, BlockState state);
-    }
-
-    /**
-     * super-interface for {@link MultiblockPartBlockEntity} and {@link IHasDummyBlocks}
-     */
-    public interface IGeneralMultiblock extends BlockstateProvider
-    {
-        @Nullable
-        IGeneralMultiblock master();
-
-        default boolean isDummy()
-        {
-            BlockState state = getState();
-            if(state.hasProperty(Properties.MULTIBLOCKSLAVE))
-                return state.getValue(Properties.MULTIBLOCKSLAVE);
-            else
-                return true;
-        }
-    }
-
-    public interface IInteractionObjectIE<T extends BlockEntity & IInteractionObjectIE<T>> extends MenuProvider
+    public interface IInteractionObject<T extends BlockEntity & IInteractionObject<T>> extends MenuProvider
     {
         @Nullable
         T getGuiMaster();
