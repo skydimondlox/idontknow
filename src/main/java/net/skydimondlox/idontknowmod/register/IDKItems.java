@@ -10,6 +10,7 @@ package net.skydimondlox.idontknowmod.register;
 
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
@@ -21,42 +22,36 @@ import net.minecraftforge.registries.RegistryObject;
 import net.skydimondlox.idontknowmod.api.EnumMetals;
 import net.skydimondlox.idontknowmod.api.Lib;
 import net.skydimondlox.idontknowmod.item.BaseItem;
-
+import net.skydimondlox.idontknowmod.item.IDKTools;
 import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public final class IDKItems
-{
+public final class IDKItems {
     public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Lib.MOD_ID);
 
     private IDKItems()
     {
     }
 
-    public static final class Ingredients
-    {
+    public static final class Ingredients {
         public static final ItemRegObject<BaseItem> STICK_STONE = simple("stick_stone");
-        public static final ItemRegObject<BaseItem> STICK_IRON = simple("stick_iron");
 
-        private static void init()
-        {
+
+        private static void init() {
         }
     }
 
-    public static final class Metals
-    {
+    public static final class Metals {
         public static final Map<EnumMetals, ItemRegObject<Item>> INGOTS = new EnumMap<>(EnumMetals.class);
         public static final Map<EnumMetals, ItemRegObject<Item>> NUGGETS = new EnumMap<>(EnumMetals.class);
         public static final Map<EnumMetals, ItemRegObject<Item>> RAW_ORES = new EnumMap<>(EnumMetals.class);
         public static final Map<EnumMetals, ItemRegObject<BaseItem>> DUSTS = new EnumMap<>(EnumMetals.class);
         public static final Map<EnumMetals, ItemRegObject<BaseItem>> PLATES = new EnumMap<>(EnumMetals.class);
 
-        private static void init()
-        {
-            for(EnumMetals m : EnumMetals.values())
-            {
+        private static void init() {
+            for(EnumMetals m : EnumMetals.values()) {
                 String name = m.tagName();
                 ItemRegObject<Item> nugget;
                 ItemRegObject<Item> ingot;
@@ -97,51 +92,104 @@ public final class IDKItems
         }
     }
 
-    public static final class Tools
-    {
+    public static final class Tools {
 
         public static final ItemRegObject<PickaxeItem> STEEL_PICK = register(
-                "pickaxe_steel", Tools.createPickaxe(Lib.MATERIAL_Steel)
+                "pickaxe_steel", IDKTools.createPickaxe(Lib.MATERIAL_Steel)
         );
         public static final ItemRegObject<ShovelItem> STEEL_SHOVEL = register(
-                "shovel_steel", Tools.createShovel(Lib.MATERIAL_Steel)
+                "shovel_steel", IDKTools.createShovel(Lib.MATERIAL_Steel)
         );
         public static final ItemRegObject<AxeItem> STEEL_AXE = register(
-                "axe_steel", Tools.createAxe(Lib.MATERIAL_Steel)
+                "axe_steel", IDKTools.createAxe(Lib.MATERIAL_Steel)
         );
         public static final ItemRegObject<HoeItem> STEEL_HOE = register(
-                "hoe_steel", Tools.createHoe(Lib.MATERIAL_Steel)
+                "hoe_steel", IDKTools.createHoe(Lib.MATERIAL_Steel)
         );
         public static final ItemRegObject<SwordItem> STEEL_SWORD = register(
-                "sword_steel", Tools.createSword(Lib.MATERIAL_Steel)
+                "sword_steel", IDKTools.createSword(Lib.MATERIAL_Steel)
         );
+
+        private static void init() {
+        }
 
     }
 
-    //TODO move all of these somewhere else
-    public static final class Misc
-    {
-        public static final Map<StoneStick, ItemRegObject<StoneStickItem>> STONE_STICK = new LinkedHashMap<>();
+    public static final class Misc {
+        public static final ItemRegObject<BaseItem> STICK_IRON = simple("iron_rod");
+        public static final ItemRegObject<BaseItem> STICK_BRONZE = simple("bronze_rod");
 
-        // We can't use an EnumMap here, since Rarity is an "extensible enum" (Forge), so people may add to it later on.
-        // And since this map is created during static class init, it may be initialized before another mod has any
-        // chance of adding the rarity.
-
-
-        public static void registerShaderBags()
-        {
-            for(Rarity r : ShaderRegistry.rarityWeightMap.keySet())
-                Items.Misc.SHADER_BAG.put(r, register(
-                        "shader_bag_"+r.name().toLowerCase(Locale.US).replace(':', '_'), () -> new ShaderBagItem(r)
-                ));
+        private static void init() {
         }
     }
 
-    public static void init()
-    {
+    public static final class Ingots {
+        public static final ItemRegObject<BaseItem> INGOT_STEEL = simple("steel_ingot");
+        public static final ItemRegObject<BaseItem> INGOT_BRONZE = simple("bronze_ingot");
+        public static final ItemRegObject<BaseItem> INGOT_TIN = simple("tin_ingot");
+        public static final ItemRegObject<BaseItem> INGOT_ZINC = simple("zinc");
+
+        private static void init() {
+        }
+    }
+
+    public static final class Gears {
+        public static final ItemRegObject<BaseItem> GEAR_IRON = simple("iron_gear");
+        public static final ItemRegObject<BaseItem> GEAR_GOLD = simple("gold_gear");
+        public static final ItemRegObject<BaseItem> GEAR_STONE = simple("stone_gear");
+        public static final ItemRegObject<BaseItem> GEAR_BRONZE = simple("bronze_gear");
+        public static final ItemRegObject<BaseItem> GEAR_COPPER = simple("copper_gear");
+        public static final ItemRegObject<BaseItem> GEAR_DIAMOND = simple("diamond_gear");
+
+        private static void init() {
+        }
+    }
+
+    public static final class Raw {
+        public static final ItemRegObject<BaseItem> RAW_TIN = simple("raw_tin");
+        public static final ItemRegObject<BaseItem> RAW_ZINC = simple("raw_zinc");
+
+        private static void init() {
+        }
+    }
+
+    public static final class MachineFrame {
+        public static final ItemRegObject<BaseItem> MACHINE_FRAME_BASIC = simple("machine_frame_basic");
+        public static final ItemRegObject<BaseItem> MACHINE_FRAME_INTERMEDIATE = simple("machine_frame_intermediate");
+        public static final ItemRegObject<BaseItem> MACHINE_FRAME_ADVANCED = simple("machine_frame_advanced");
+
+        private static void init() {
+        }
+    }
+
+    public static final class Plate {
+
+        public static final ItemRegObject<BaseItem> IRON_PLATE = simple("iron_plate");
+        public static final ItemRegObject<BaseItem> GOLD_PLATE = simple("gold_plate");
+
+        private static void init() {
+        }
+    }
+
+    public static final class IDontKnow {
+        public static final ItemRegObject<BaseItem> I_DONT_KNOW = simple("i_dont_know");
+        public static final ItemRegObject<BaseItem> ITS_SOMETHING = simple("its_something");
+        public static final ItemRegObject<BaseItem> HOW_BOUT_THIS = simple("how_bout_this");
+
+        private static void init() {
+        }
+    }
+
+    public static void init() {
         REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Load all classes to make sure the static variables are initialized
         Ingredients.init();
+        Ingots.init();
+        Gears.init();
+        Plate.init();
+        Raw.init();
+        MachineFrame.init();
+        IDontKnow.init();
         Metals.init();
         Tools.init();
         Misc.init();
@@ -182,11 +230,10 @@ public final class IDKItems
 
     private static <T extends Item> ItemRegObject<T> of(T existing)
     {
-        return new ItemRegObject<>(RegistryObject.create(Registry.ITEM.getKey(existing), ForgeRegistries.ITEMS));
+        return new ItemRegObject<>(RegistryObject.create(BuiltInRegistries.ITEM.getKey(existing), ForgeRegistries.ITEMS));
     }
 
-    public record ItemRegObject<T extends Item>(RegistryObject<T> regObject) implements Supplier<T>, ItemLike
-    {
+    public record ItemRegObject<T extends Item>(RegistryObject<T> regObject) implements Supplier<T>, ItemLike {
         @Override
         @Nonnull
         public T get()

@@ -18,13 +18,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.skydimondlox.idontknowmod.api.Tags;
+import net.skydimondlox.idontknowmod.api.IDKTags;
 import net.skydimondlox.idontknowmod.api.crafting.IngredientWithSize;
+import net.skydimondlox.idontknowmod.api.shader.CapabilityShader.ShaderWrapper;
+import net.skydimondlox.idontknowmod.api.shader.impl.ShaderCaseItem;
+import net.skydimondlox.idontknowmod.api.EnumMetals;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
+
+import static net.skydimondlox.idontknowmod.api.API.Loc;
 
 public class ShaderRegistry
 {
@@ -69,7 +74,7 @@ public class ShaderRegistry
     /**
      * The deafault cost for replicating a shader. Prices are multiplied with 10-rarity level. Prices can be adjusted for every registry entry
      */
-    public static TagKey<Item> defaultReplicationCost = Tags.getTagsFor(EnumMetals.SILVER).dust;
+    public static TagKey<Item> defaultReplicationCost = IDKTags.getTagsFor(EnumMetals.ALUMINUM).dust;
     /**
      * A HashMap to set default texture bounds for the additional layers of a shadercase. Saves you the trouble of redfining them for every shader. See {@link ShaderLayer#setTextureBounds(double... bounds)}.
      */
@@ -85,15 +90,6 @@ public class ShaderRegistry
     public static ShaderRegistryEntry registerShader(ResourceLocation name, String overlayType, Rarity rarity, int colourPrimary, int colourSecondary, int colourBackground, int colourBlade, String additionalTexture, int colourAdditional, boolean loot, boolean bags)
     {
         registerShader_Item(name, rarity, colourBackground, colourPrimary, colourSecondary);
-        registerShader_Revolver(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, colourBlade, additionalTexture, colourAdditional);
-        registerShader_Chemthrower(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Drill(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Buzzsaw(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Railgun(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Shield(name, overlayType, rarity, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Minecart(name, overlayType, rarity, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Balloon(name, overlayType, rarity, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
-        registerShader_Banner(name, overlayType, rarity, colourPrimary, colourSecondary, additionalTexture, colourAdditional);
         for(IShaderRegistryMethod method : shaderRegistrationMethods)
             method.apply(name, overlayType, rarity, colourBackground, colourPrimary, colourSecondary, colourBlade, additionalTexture, colourAdditional);
         return shaderRegistry.get(name)
@@ -125,287 +121,10 @@ public class ShaderRegistry
     public static ShaderCaseItem registerShader_Item(ResourceLocation name, Rarity rarity, int colour0, int colour1, int colour2)
     {
         List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shader_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shader_1"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shader_2"), colour2));
+        list.add(new ShaderLayer(Loc("item/shader_0"), colour0));
+        list.add(new ShaderLayer(Loc("item/shader_1"), colour1));
+        list.add(new ShaderLayer(Loc("item/shader_2"), colour2));
         ShaderCaseItem shader = new ShaderCaseItem(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Chemthrower Shaders<br>
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           grip colour
-     * @param colour1           base colour
-     * @param colour2           design colour
-     * @param colourBlade       colour of the bayonet blade
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseRevolver registerShader_Revolver(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, int colour2, int colourBlade, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_grip"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_0"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_0"), colourBlade));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_1_"+overlayType), colour2));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:revolvers/shaders/revolver_uncoloured"), 0xffffffff));
-        ShaderCaseRevolver shader = new ShaderCaseRevolver(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Chemthrower Shaders<br>
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           grip colour
-     * @param colour1           base colour
-     * @param colour2           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseChemthrower registerShader_Chemthrower(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, int colour2, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/chemthrower_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/chemthrower_0"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/chemthrower_1_"+overlayType), colour2));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:item/shaders/chemthrower_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/chemthrower_uncoloured"), 0xffffffff));
-        ShaderCaseChemthrower shader = new ShaderCaseChemthrower(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Drill Shaders<br>
-     * Note that they have an extra layer with null for the ResourceLocation, for the drill head and augers
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           grip colour
-     * @param colour1           base colour
-     * @param colour2           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseDrill registerShader_Drill(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, int colour2, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/drill_diesel_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/drill_diesel_0"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/drill_diesel_1_"+overlayType), colour2));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:item/shaders/drill_diesel_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/drill_diesel_uncoloured"), 0xffffffff));
-        list.add(new ShaderLayer(null, 0xffffffff));//final pass is for drill head and augers
-        ShaderCaseDrill shader = new ShaderCaseDrill(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Buzzsaw Shaders<br>
-     * Note that they have an extra layer with null for the ResourceLocation, for the sawblades
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           grip colour
-     * @param colour1           base colour
-     * @param colour2           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseBuzzsaw registerShader_Buzzsaw(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, int colour2, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList<>();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/buzzsaw_diesel_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/buzzsaw_diesel_0"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/buzzsaw_diesel_1_"+overlayType), colour2));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:item/shaders/buzzsaw_diesel_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/buzzsaw_diesel_uncoloured"), 0xffffffff));
-        list.add(new ShaderLayer(null, 0xffffffff));//final pass is for drill head and augers
-        ShaderCaseBuzzsaw shader = new ShaderCaseBuzzsaw(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Railgun Shaders
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           grip colour
-     * @param colour1           base colour
-     * @param colour2           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseRailgun registerShader_Railgun(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, int colour2, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/railgun_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/railgun_0"), colour1));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/railgun_1_"+overlayType), colour2));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:item/shaders/railgun_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/railgun_uncoloured"), 0xffffffff));
-
-        ShaderCaseRailgun shader = new ShaderCaseRailgun(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Shield Shaders
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           base colour
-     * @param colour1           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseShield registerShader_Shield(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/shield_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/shield_1_"+overlayType), colour1));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:item/shaders/shield_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:item/shaders/shield_uncoloured"), 0xffffffff));
-
-        ShaderCaseShield shader = new ShaderCaseShield(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Minecart Shaders
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           base colour
-     * @param colour1           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseMinecart registerShader_Minecart(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        //Minecart textures need .png behind them, since they are used for direct binding, not stitching >_>
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:textures/models/shaders/minecart_0.png"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:textures/models/shaders/minecart_1_"+overlayType+".png"), colour1));
-        if(additionalTexture!=null)
-        {
-            if(additionalTexture.indexOf(58) >= 0)
-                list.add(new ShaderLayer(new ResourceLocation(additionalTexture+".png"), colourAddtional));
-            else
-                list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:textures/models/shaders/minecart_"+additionalTexture+".png"), colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:textures/models/shaders/minecart_uncoloured.png"), 0xffffffff));
-
-        ShaderCaseMinecart shader = new ShaderCaseMinecart(list);
-        if(overlayType.equals("1")||overlayType.equals("2")||overlayType.equals("7"))
-        {
-            shader.renderSides[1][1] = false;
-            shader.renderSides[1][2] = false;
-        }
-        if(additionalTexture!=null)
-        {
-            shader.renderSides[2][1] = false;
-            shader.renderSides[2][2] = false;
-        }
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Balloon Shaders
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           base colour
-     * @param colour1           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseBalloon registerShader_Balloon(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/balloon_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/balloon_1_"+overlayType), colour1));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:block/shaders/balloon_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/balloon_uncoloured"), 0xffffffff));
-
-        ShaderCaseBalloon shader = new ShaderCaseBalloon(list);
-        return registerShaderCase(name, shader, rarity);
-    }
-
-    /**
-     * Method to register a default implementation of Banner Shaders
-     *
-     * @param name              name of the shader
-     * @param overlayType       uses IE's existing overlays. To use custom ones, you'll need your own method.
-     * @param rarity            Rarity of the shader item
-     * @param colour0           base colour
-     * @param colour1           design colour
-     * @param additionalTexture additional overlay texture. Null if not needed.
-     * @param colourAddtional   colour for the additional texture, if present
-     * @return the registered ShaderCase
-     */
-    public static ShaderCaseBanner registerShader_Banner(ResourceLocation name, String overlayType, Rarity rarity, int colour0, int colour1, String additionalTexture, int colourAddtional)
-    {
-        List<ShaderLayer> list = new ArrayList<>();
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/banner_0"), colour0));
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/banner_1_"+overlayType), colour1));
-        if(additionalTexture!=null)
-        {
-            ResourceLocation rl = additionalTexture.indexOf(58) >= 0?new ResourceLocation(additionalTexture): new ResourceLocation("immersiveengineering:block/shaders/banner_"+additionalTexture);
-            list.add(new ShaderLayer(rl, colourAddtional));
-        }
-        list.add(new ShaderLayer(new ResourceLocation("immersiveengineering:block/shaders/banner_uncoloured"), 0xffffffff));
-
-        ShaderCaseBanner shader = new ShaderCaseBanner(list);
         return registerShaderCase(name, shader, rarity);
     }
 

@@ -18,8 +18,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags.Blocks;
 import net.minecraftforge.common.Tags.Items;
-import net.skydimondlox.idontknowmod.api.EnumMetals;
-import net.skydimondlox.idontknowmod.api.Lib;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
@@ -31,7 +29,7 @@ import java.util.function.BiConsumer;
 import static net.skydimondlox.idontknowmod.api.utils.TagUtils.*;
 
 
-public class Tags
+public class IDKTags
 {
 
     private static final Map<TagKey<Block>, TagKey<Item>> toItemTag = new HashMap<>();
@@ -48,24 +46,41 @@ public class Tags
         toItemTag.put(Blocks.GRAVEL, Items.GRAVEL);
     }
 
-    //Vanilla
-    public static final TagKey<Item> clay = createItemWrapper(forgeLoc("clay"));
-    public static final TagKey<Block> clayBlock = createBlockTag(getStorageBlock("clay"));
-    public static final TagKey<Item> charCoal = createItemWrapper(forgeLoc("charcoal"));
-    public static final TagKey<Block> glowstoneBlock = createBlockTag(getStorageBlock("glowstone"));
-    public static final TagKey<Block> colorlessSandstoneBlocks = createBlockTag(forgeLoc("sandstone/colorless"));
-    public static final TagKey<Block> redSandstoneBlocks = createBlockTag(forgeLoc("sandstone/red"));
-    public static final TagKey<Item> cutCopperBlocks = createItemWrapper(rl("cut_blocks/copper"));
-    public static final TagKey<Item> cutCopperStairs = createItemWrapper(rl("cut_stairs/copper"));
-    public static final TagKey<Item> cutCopperSlabs = createItemWrapper(rl("cut_slabs/copper"));
-
-
     public static final TagKey<Item> ironRod = createItemWrapper(getRod("iron"));
+    public static final TagKey<Item> stoneStick = createItemWrapper(getRod("stone"));
+    public static final TagKey<Item> bronzeRod = createItemWrapper(getRod("bronze"));
+    public static final TagKey<Item> steelIngot = createItemWrapper(getIngot("steel"));
+    public static final TagKey<Item> bronzeIngot = createItemWrapper(getIngot("bronze"));
+    public static final TagKey<Item> tinIngot = createItemWrapper(getIngot("tin"));
+    public static final TagKey<Item> zincIngot = createItemWrapper(getIngot("zinc"));
+    public static final TagKey<Item> stoneGear = createItemWrapper(getGear("stone"));
+    public static final TagKey<Item> copperGear = createItemWrapper(getGear("copper"));
+    public static final TagKey<Item> ironGear = createItemWrapper(getGear("iron"));
+    public static final TagKey<Item> goldGear = createItemWrapper(getGear("gold"));
+    public static final TagKey<Item> diamondGear = createItemWrapper(getGear("diamond"));
+    public static final TagKey<Item> bronzeGear = createItemWrapper(getGear("bronze"));
+    public static final TagKey<Item> machineframes = createItemWrapper(forgeLoc("machine_frames"));
+    public static final TagKey<Item> basic = createItemWrapper(forgeLoc("machine_frames/basic"));
+    public static final TagKey<Item> intermediate = createItemWrapper(forgeLoc("machine_frames/intermediate"));
+    public static final TagKey<Item> advanced = createItemWrapper(forgeLoc("machine_frames/advanced"));
     public static final TagKey<Item> tools = createItemWrapper(forgeLoc("tools"));
     public static final TagKey<Item> pickaxes = createItemWrapper(forgeLoc("tools/pickaxes"));
     public static final TagKey<Item> shovels = createItemWrapper(forgeLoc("tools/shovels"));
     public static final TagKey<Item> axes = createItemWrapper(forgeLoc("tools/axes"));
     public static final TagKey<Item> hoes = createItemWrapper(forgeLoc("tools/hoes"));
+    public static final TagKey<Item> rawzinc = createItemWrapper(getRawOre("zinc"));
+    public static final TagKey<Item> rawtin = createItemWrapper(getRawOre("tin"));
+    public static final TagKey<Item> ironplate = createItemWrapper(getPlate("iron"));
+    public static final TagKey<Item> goldplate = createItemWrapper(getPlate("gold"));
+    public static final TagKey<Item> idontknow = createItemWrapper(forgeLoc("idontknow"));
+    public static final TagKey<Block> idontknowblock = createBlockWrapper(forgeLoc("idontknowblock"));
+    public static final TagKey<Block> tinblock = createBlockWrapper(getStorageBlock("tin"));
+    public static final TagKey<Block> zincblock = createBlockWrapper(getStorageBlock("zinc"));
+    public static final TagKey<Block> bronzeblock = createBlockWrapper(getStorageBlock("bronze"));
+
+
+
+    public static final TagKey<Item> forbiddenInCrates = createItemWrapper(rl("forbidden_in_crates"));
 
     @Deprecated(forRemoval = true)
     public static final TagKey<Biome> hasMineralVeins = createBiomeWrapper(rl("has_mineral_veins"));
@@ -109,7 +124,6 @@ public class Tags
         public final TagKey<Item> plate;
         public final TagKey<Item> dust;
         public final TagKey<Block> storage;
-        public final TagKey<Block> sheetmetal;
         @Nullable
         public final TagKey<Block> ore;
         @Nullable
@@ -149,7 +163,6 @@ public class Tags
             }
             else
                 throw new RuntimeException("Unkown vanilla metal: "+m.name());
-            sheetmetal = createBlockTag(getSheetmetalBlock(name));
             nugget = createItemWrapper(getNugget(name));
             ingot = createItemWrapper(getIngot(name));
             plate = createItemWrapper(getPlate(name));
@@ -218,16 +231,6 @@ public class Tags
     public static ResourceLocation getGear(String type)
     {
         return forgeLoc("gears/"+type);
-    }
-
-    public static ResourceLocation getWire(String type)
-    {
-        return forgeLoc("wires/"+type);
-    }
-
-    public static ResourceLocation getSheetmetalBlock(String type)
-    {
-        return forgeLoc("sheetmetals/"+type);
     }
 
     private static ResourceLocation rl(String path)

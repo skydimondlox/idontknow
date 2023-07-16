@@ -3,7 +3,9 @@ package net.skydimondlox.idontknowmod;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -22,10 +24,14 @@ import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
 import net.skydimondlox.idontknowmod.item.ModItems;
 import net.skydimondlox.idontknowmod.networking.ModMessages;
 import net.skydimondlox.idontknowmod.recipe.ModRecipes;
+import net.skydimondlox.idontknowmod.register.IDKBlocks;
+import net.skydimondlox.idontknowmod.register.IDKItems;
 import net.skydimondlox.idontknowmod.screen.AlloyFurnaceScreen;
 import net.skydimondlox.idontknowmod.screen.ElectricPressScreen;
 import net.skydimondlox.idontknowmod.screen.ModMenuTypes;
 import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
 
 
 @Mod(idontknowmod.MOD_ID)
@@ -64,6 +70,16 @@ public class idontknowmod {
         ModMessages.register();
     }
 
+    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(MOD_ID)
+    {
+        @Override
+        @Nonnull
+        public ItemStack makeIcon()
+        {
+            return new ItemStack(IDKItems.Misc.StoneStick.get());
+        }
+    };
+
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
@@ -84,8 +100,8 @@ public class idontknowmod {
             event.accept(ModItems.COPPER_GEAR);
             event.accept(ModItems.BRONZE_GEAR);
             //MACHINES
-            event.accept(ModBlocks.ELECTRIC_PRESS);
-            event.accept(ModBlocks.ALLOY_FURNACE);
+            event.accept(IDKBlocks.ELECTRIC_PRESS);
+            event.accept(IDKBlocks.ALLOY_FURNACE);
             //ZINC
             event.accept(ModBlocks.ZINC_ORE);
             event.accept(ModBlocks.DEEPSLATE_ZINC_ORE);

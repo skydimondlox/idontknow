@@ -8,6 +8,9 @@
 
 package net.skydimondlox.idontknowmod.api;
 
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+
 public class Lib {
 
     public static final String MOD_ID = "idkmod";
@@ -28,5 +31,44 @@ public class Lib {
 
     public static final String GUIID_ElectricPress = "electric_press";
     public static final String GUIID_AlloyFurnace = "alloy_furnace";
+
+    public static final Tier MATERIAL_Steel = new Tier()
+    {
+        @Override
+        public int getUses()
+        {
+            return 641;
+        }
+
+        @Override
+        public float getSpeed()
+        {
+            return 7F;
+        }
+
+        @Override
+        public float getAttackDamageBonus()
+        {
+            return 3F;
+        }
+
+        @Override
+        public int getLevel()
+        {
+            return 2;
+        }
+
+        @Override
+        public int getEnchantmentValue()
+        {
+            return 10;
+        }
+
+        @Override
+        public Ingredient getRepairIngredient()
+        {
+            return Ingredient.of(IDKTags.getTagsFor(EnumMetals.STEEL).ingot);
+        }
+    };
 
 }

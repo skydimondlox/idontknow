@@ -10,7 +10,7 @@ package net.skydimondlox.idontknowmod.api.shader;
  */
 
 import com.google.common.base.Preconditions;
-import com.mojang.math.Vector4f;
+import org.joml.Vector4f;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 

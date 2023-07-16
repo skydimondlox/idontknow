@@ -8,7 +8,7 @@ package net.skydimondlox.idontknowmod.api.shader;
  * Details can be found in the license file in the root folder of this project
  */
 
-import com.mojang.math.Vector4f;
+import org.joml.Vector4f;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collection;
