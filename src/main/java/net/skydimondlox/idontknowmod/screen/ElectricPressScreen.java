@@ -61,7 +61,7 @@ public class ElectricPressScreen extends AbstractContainerScreen<ElectricPressMe
 
     private void renderEnergyAreaTooltips(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
-            renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
+            renderTooltip(pPoseStack, energyInfoArea.fillTooltipOverArea,
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
