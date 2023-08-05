@@ -3,8 +3,8 @@ package net.skydimondlox.idontknowmod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,63 +21,63 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, idontknowmod.MOD_ID);
 
     public static final  RegistryObject<Block> IDONTKNOWBLOCK = registerBlock("idontknowblock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> ITSABLOCK = registerBlock("itsablock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.WOOD)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> ITSANORE = registerBlock("itsanore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> DEEPSLATEITSANORE = registerBlock("deepslateitsanore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> PRESSED_IRON_BLOCK = registerBlock("pressedironblock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> PRESSED_GOLD_BLOCK = registerBlock("pressedgoldblock",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> ELECTRIC_PRESS = registerBlock("electric_press",
-            () -> new ElectricPressBlock(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new ElectricPressBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final  RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace",
-            () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final  RegistryObject<Block> ZINC_ORE = registerBlock("zinc_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> DEEPSLATE_ZINC_ORE = registerBlock("deepslate_zinc_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> ZINC_BLOCK = registerBlock("zinc_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
 
 

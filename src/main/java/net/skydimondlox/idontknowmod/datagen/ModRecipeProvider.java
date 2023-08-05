@@ -124,15 +124,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .of(Blocks.COBBLESTONE).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.AMZO_STICK.get())
-                 .pattern(" C ")
-                 .pattern(" S ")
-                 .define('C', Ingredient.of(Blocks.f_271304_))
-                 .define('S', Ingredient.of(Items.STICK))
-                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(Blocks.f_271304_).build()))
-                 .save(consumer);
-
          ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 9)
                          .requires(Blocks.COBWEB)
                          .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item().of(Blocks.COBWEB).build()))

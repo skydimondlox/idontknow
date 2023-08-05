@@ -34,7 +34,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TIN_INGOT);
         simpleItem(ModItems.RAW_TIN);
         handheldItem(ModItems.STONE_STICK);
-        handheldItem(ModItems.AMZO_STICK);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
