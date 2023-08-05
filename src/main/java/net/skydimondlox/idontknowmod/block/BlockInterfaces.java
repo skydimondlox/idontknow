@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootContext.Builder;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
@@ -28,17 +29,16 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.skydimondlox.idontknowmod.api.Enums.IOSideConfig;
-import net.skydimondlox.idontknowmod.api.Properties;
-import net.skydimondlox.idontknowmod.register.MenuTypes.*;
+import net.skydimondlox.idontknowmod.api.IDKProperties;
+import net.skydimondlox.idontknowmod.register.IDKMenuTypes.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
-public class BlockInterfaces
-{
-    public interface IBlockOverlayText
-    {
+public class BlockInterfaces {
+
+    public interface IBlockOverlayText {
         @Nullable
         Component[] getOverlayText(Player player, HitResult mop, boolean hammer);
 
@@ -46,30 +46,24 @@ public class BlockInterfaces
         boolean useNixieFont(Player player, HitResult mop);
     }
 
-    public interface ISoundBE
-    {
+    public interface ISoundBE {
         boolean shouldPlaySound(String sound);
 
-        default float getSoundRadiusSq()
-        {
+        default float getSoundRadiusSq() {
             return 256.0f;
         }
     }
 
-    public interface ISpawnInterdiction
-    {
+    public interface ISpawnInterdiction {
         double getInterdictionRangeSquared();
     }
 
-    public interface IComparatorOverride
-    {
+    public interface IComparatorOverride {
         int getComparatorInputOverride();
     }
 
-    public interface IRedstoneOutput
-    {
-        default int getWeakRSOutput(Direction side)
-        {
+    public interface IRedstoneOutput {
+        default int getWeakRSOutput(Direction side) {
             return getStrongRSOutput(side);
         }
 
@@ -78,67 +72,57 @@ public class BlockInterfaces
         boolean canConnectRedstone(Direction side);
     }
 
-    public interface IColouredBlock
-    {
+    public interface IColouredBlock {
         boolean hasCustomBlockColours();
 
         int getRenderColour(BlockState state, @Nullable BlockGetter worldIn, @Nullable BlockPos pos, int tintIndex);
     }
 
-    public interface IColouredBE
-    {
+    public interface IColouredBE {
         int getRenderColour(int tintIndex);
     }
 
-    public interface IDirectionalBE
-    {
+    public interface IDirectionalBE {
         Direction getFacing();
 
         void setFacing(Direction facing);
 
         /**
-         * @return 0 = side clicked, 1=piston behaviour,  2 = horizontal, 3 = vertical, 4 = x/z axis, 5 = horizontal based on quadrant, 6 = horizontal preferring clicked side
-         */
+        * @return 0 = side clicked, 1=piston behaviour,  2 = horizontal, 3 = vertical, 4 = x/z axis, 5 = horizontal based on quadrant, 6 = horizontal preferring clicked side
+        */
         PlacementLimitation getFacingLimitation();
 
-        default Direction getFacingForPlacement(BlockPlaceContext ctx)
-        {
+        default Direction getFacingForPlacement(BlockPlaceContext ctx) {
             Direction f = getFacingLimitation().getDirectionForPlacement(ctx);
 
             return mirrorFacingOnPlacement(ctx.getPlayer())?f.getOpposite(): f;
         }
 
-        default boolean mirrorFacingOnPlacement(LivingEntity placer)
-        {
+        default boolean mirrorFacingOnPlacement(LivingEntity placer) {
             return false;
         }
 
-        default boolean canHammerRotate(Direction side, Vec3 hit, LivingEntity entity)
-        {
+        default boolean canHammerRotate(Direction side, Vec3 hit, LivingEntity entity) {
             return true;
         }
 
-        default void afterRotation(Direction oldDir, Direction newDir)
-        {
+        default void afterRotation(Direction oldDir, Direction newDir) {
         }
 
     }
 
-    public interface BlockstateProvider
-    {
+    public interface BlockstateProvider {
         BlockState getState();
 
         void setState(BlockState newState);
     }
 
-    public interface IStateBasedDirectional extends IDirectionalBE, BlockstateProvider
-    {
+    public interface IStateBasedDirectional extends IDirectionalBE, BlockstateProvider {
 
         Property<Direction> getFacingProperty();
 
         @Override
-        default Direction getFacing()
-        {
+        default Direction getFacing() {
             BlockState state = getState();
             if(state.hasProperty(getFacingProperty()))
                 return state.getValue(getFacingProperty());
@@ -147,178 +131,144 @@ public class BlockInterfaces
         }
 
         @Override
-        default void setFacing(Direction facing)
-        {
+        default void setFacing(Direction facing) {
             BlockState oldState = getState();
             BlockState newState = oldState.setValue(getFacingProperty(), facing);
             setState(newState);
         }
     }
 
-    public interface IAdvancedDirectionalBE extends IDirectionalBE
-    {
+    public interface IAdvancedDirectionalBE extends IDirectionalBE {
         void onDirectionalPlacement(Direction side, float hitX, float hitY, float hitZ, LivingEntity placer);
     }
 
-    public interface IConfigurableSides
-    {
+    public interface IConfigurableSides {
         IOSideConfig getSideConfig(Direction side);
 
         boolean toggleSide(Direction side, Player p);
     }
 
-    public interface IBlockEntityDrop extends IPlacementInteraction
-    {
-        List<ItemStack> getBlockEntityDrop(LootContext context);
+    public interface IBlockEntityDrop extends IPlacementInteraction {
+        List<ItemStack> getBlockEntityDrop(LootParams.Builder parms);
 
-        default ItemStack getPickBlock(@Nullable Player player, BlockState state, HitResult rayRes)
-        {
+        default ItemStack getPickBlock(@Nullable Player player, BlockState state, HitResult rayRes) {
+            //TODO make this work properly on the client side
             BlockEntity tile = (BlockEntity)this;
             if(!(tile.getLevel() instanceof ServerLevel world))
                 return new ItemStack(state.getBlock());
             return getBlockEntityDrop(
-                    new Builder(world)
+                    new LootParams.Builder(world)
                             .withOptionalParameter(LootContextParams.TOOL, ItemStack.EMPTY)
                             .withOptionalParameter(LootContextParams.BLOCK_STATE, world.getBlockState(tile.getBlockPos()))
                             .withOptionalParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(tile.getBlockPos()))
-                            .create(LootContextParamSets.BLOCK)
             ).get(0);
         }
     }
 
-    public interface IAdditionalDrops
-    {
+    public interface IAdditionalDrops {
         Collection<ItemStack> getExtraDrops(Player player, BlockState state);
     }
 
-    public interface IEntityProof
-    {
+    public interface IEntityProof {
         boolean canEntityDestroy(Entity entity);
     }
 
-    public interface IPlayerInteraction
-    {
+    public interface IPlayerInteraction {
+        //TODO should really return ActionResultType
         boolean interact(Direction side, Player player, InteractionHand hand, ItemStack heldItem, float hitX, float hitY, float hitZ);
     }
 
-    public interface IHammerInteraction
-    {
-        boolean hammerUseSide(Direction side, Player player, InteractionHand hand, Vec3 hitVec);
-    }
-
-    public interface IScrewdriverInteraction
-    {
-        InteractionResult screwdriverUseSide(Direction side, Player player, InteractionHand hand, Vec3 hitVec);
-    }
-
-    public interface IPlacementInteraction
-    {
+    public interface IPlacementInteraction {
         void onBEPlaced(BlockPlaceContext ctx);
     }
 
-    public interface IActiveState extends BlockstateProvider
-    {
-        default boolean getIsActive()
-        {
+    public interface IActiveState extends BlockstateProvider {
+        default boolean getIsActive() {
             BlockState state = getState();
-            if(state.hasProperty(Properties.ACTIVE))
-                return state.getValue(Properties.ACTIVE);
+            if(state.hasProperty(IDKProperties.ACTIVE))
+                return state.getValue(IDKProperties.ACTIVE);
             else
                 return false;
         }
 
-        default void setActive(boolean active)
-        {
+        default void setActive(boolean active) {
             BlockState state = getState();
-            BlockState newState = state.setValue(Properties.ACTIVE, active);
+            BlockState newState = state.setValue(IDKProperties.ACTIVE, active);
             setState(newState);
         }
     }
 
-    public interface IMirrorAble extends BlockstateProvider
-    {
-        default boolean getIsMirrored()
-        {
+    public interface IMirrorAble extends BlockstateProvider {
+        default boolean getIsMirrored() {
             BlockState state = getState();
-            if(state.hasProperty(Properties.MIRRORED))
-                return state.getValue(Properties.MIRRORED);
+            if(state.hasProperty(IDKProperties.MIRRORED))
+                return state.getValue(IDKProperties.MIRRORED);
             else
                 return false;
         }
 
-        default void setMirrored(boolean mirrored)
-        {
+        default void setMirrored(boolean mirrored) {
             BlockState state = getState();
-            BlockState newState = state.setValue(Properties.MIRRORED, mirrored);
+            BlockState newState = state.setValue(IDKProperties.MIRRORED, mirrored);
             setState(newState);
         }
     }
 
-    public interface IBlockBounds extends ISelectionBounds, ICollisionBounds
-    {
+    public interface IBlockBounds extends ISelectionBounds, ICollisionBounds {
         @Nonnull
         VoxelShape getBlockBounds(@Nullable CollisionContext ctx);
 
         @Nonnull
         @Override
-        default VoxelShape getCollisionShape(CollisionContext ctx)
-        {
+        default VoxelShape getCollisionShape(CollisionContext ctx) {
             return getBlockBounds(ctx);
         }
 
         @Nonnull
         @Override
-        default VoxelShape getSelectionShape(@Nullable CollisionContext ctx)
-        {
+        default VoxelShape getSelectionShape(@Nullable CollisionContext ctx) {
             return getBlockBounds(ctx);
         }
     }
 
-    public interface ISelectionBounds
-    {
+    public interface ISelectionBounds {
         @Nonnull
         VoxelShape getSelectionShape(@Nullable CollisionContext ctx);
     }
 
-    public interface ICollisionBounds
-    {
+    public interface ICollisionBounds {
         @Nonnull
         VoxelShape getCollisionShape(CollisionContext ctx);
     }
 
-    public interface IInteractionObject<T extends BlockEntity & IInteractionObject<T>> extends MenuProvider
-    {
+    public interface IInteractionObjectIDK<T extends BlockEntity & IInteractionObjectIDK<T>> extends MenuProvider {
         @Nullable
         T getGuiMaster();
 
-        BEContainer<? super T, ?> getContainerType();
+        ArgContainer<? super T, ?> getContainerType();
 
         boolean canUseGui(Player player);
 
-        default boolean isValid()
-        {
+        default boolean isValid() {
             return getGuiMaster()!=null;
         }
 
         @Nonnull//Super is annotated nullable, but Forge assumes Nonnull in at least one place
         @Override
-        default AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player playerEntity)
-        {
+        default AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player playerEntity) {
             T master = getGuiMaster();
             Preconditions.checkNotNull(master);
-            BEContainer<? super T, ?> type = getContainerType();
+            ArgContainer<? super T, ?> type = getContainerType();
             return type.create(id, playerInventory, master);
         }
 
         @Override
-        default Component getDisplayName()
-        {
+        default Component getDisplayName() {
             return Component.literal("");
         }
     }
 
-    public interface IProcessBE
-    {
+    public interface IProcessBE {
         int[] getCurrentProcessesStep();
 
         int[] getCurrentProcessesMax();

@@ -17,15 +17,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.Output;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.network.NetworkHooks;
-import net.skydimondlox.idontknowmod.register.MenuTypes;
-import net.skydimondlox.idontknowmod.register.MenuTypes.ItemContainerType;
-import net.skydimondlox.idontknowmod.register.MenuTypes.ItemContainerTypeNew;
-import net.skydimondlox.idontknowmod.idontknowmod;
+import net.skydimondlox.idontknowmod.register.IDKMenuTypes.ItemContainerTypeNew;
+import net.skydimondlox.idontknowmod.register.IDKMenuTypes.ItemContainerType;
+import net.skydimondlox.idontknowmod.register.IDKMenuTypes;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,12 +41,7 @@ public class BaseItem extends Item
 
     public BaseItem(Properties props)
     {
-        this(props, idontknowmod.ITEM_GROUP);
-    }
-
-    public BaseItem(Properties props, CreativeModeTab group)
-    {
-        super(props.tab(group));
+        super(props);
     }
 
     public BaseItem setBurnTime(int burnTime)
@@ -72,6 +66,11 @@ public class BaseItem extends Item
         openGui(player, hand==InteractionHand.MAIN_HAND?EquipmentSlot.MAINHAND: EquipmentSlot.OFFHAND);
     }
 
+    public void fillCreativeTab(Output out)
+    {
+        out.accept(this);
+    }
+
     protected void openGui(Player player, EquipmentSlot slot)
     {
         ItemStack stack = player.getItemBySlot(slot);
@@ -86,7 +85,7 @@ public class BaseItem extends Item
             ItemContainerType<?> typeOld = getContainerType();
             if(typeOld!=null)
                 NetworkHooks.openScreen((ServerPlayer)player, new SimpleMenuProvider(
-                        (id, inv, p) -> typeOld.create(id, inv, player.level, slot, stack),
+                        (id, inv, p) -> typeOld.create(id, inv, player.level(), slot, stack),
                         Component.empty()
                 ), buffer -> buffer.writeInt(slot.ordinal()));
         }
@@ -110,13 +109,13 @@ public class BaseItem extends Item
     }
 
     @Nullable
-    protected MenuTypes.ItemContainerType<?> getContainerType()
+    protected IDKMenuTypes.ItemContainerType<?> getContainerType()
     {
         return null;
     }
 
     @Nullable
-    protected MenuTypes.ItemContainerTypeNew<?> getContainerTypeNew()
+    protected IDKMenuTypes.ItemContainerTypeNew<?> getContainerTypeNew()
     {
         return null;
     }

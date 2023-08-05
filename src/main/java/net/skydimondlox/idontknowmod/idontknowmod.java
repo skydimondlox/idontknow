@@ -11,27 +11,29 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.skydimondlox.idontknowmod.api.API;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.block.entity.ModBlockEntities;
 import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
-import net.skydimondlox.idontknowmod.item.ModItems;
 import net.skydimondlox.idontknowmod.networking.ModMessages;
 import net.skydimondlox.idontknowmod.recipe.ModRecipes;
-import net.skydimondlox.idontknowmod.register.IDKBlocks;
-import net.skydimondlox.idontknowmod.register.IDKItems;
+import net.skydimondlox.idontknowmod.register.IDKBlocks.*;
+import net.skydimondlox.idontknowmod.register.IDKItems.*;
 import net.skydimondlox.idontknowmod.screen.AlloyFurnaceScreen;
 import net.skydimondlox.idontknowmod.screen.ElectricPressScreen;
 import net.skydimondlox.idontknowmod.screen.ModMenuTypes;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 
 @Mod(idontknowmod.MOD_ID)
@@ -39,6 +41,7 @@ public class idontknowmod {
     public static final String MOD_ID = "idkmod";
     public static final String VERSION = API.getCurrentVersion();
     private static final Logger LOGGER = LogUtils.getLogger();
+    public static final CommonProxy proxy = DistExecutor.safeRunForDist(bootstrapErrorToXCPInDev(() -> ClientProxy::new), bootstrapErrorToXCPInDev(() -> CommonProxy::new));
 
     public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
             .named(new ResourceLocation(MOD_ID, "main"))
@@ -47,13 +50,26 @@ public class idontknowmod {
             .clientAcceptedVersions(VERSION::equals)
             .simpleChannel();
 
+    public static <T>
+    Supplier<T> bootstrapErrorToXCPInDev(Supplier<T> in)
+    {
+        if(FMLLoader.isProduction())
+            return in;
+        return () -> {
+            try
+            {
+                return in.get();
+            } catch(BootstrapMethodError e)
+            {
+                throw new RuntimeException(e);
+            }
+        };
+    }
+
     public idontknowmod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, bootstrapErrorToXCPInDev(() -> ClientProxy::modConstruction));
         ModCreativeModeTabs.register(modEventBus);
-
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
@@ -76,7 +92,7 @@ public class idontknowmod {
         @Nonnull
         public ItemStack makeIcon()
         {
-            return new ItemStack(IDKItems.Misc.StoneStick.get());
+            return new ItemStack(Ingredients.STICK_STONE.get());
         }
     };
 
@@ -88,43 +104,41 @@ public class idontknowmod {
 
         if(event.getTab() == ModCreativeModeTabs.IDONTKNOWTAB.get()) {
             //PRESSED
-            event.accept(ModBlocks.PRESSED_GOLD_BLOCK);
-            event.accept(ModBlocks.PRESSED_IRON_BLOCK);
-            event.accept(ModItems.PRESSED_IRON);
-            event.accept(ModItems.PRESSED_GOLD);
+            event.accept(Plate.IRON_PLATE.get());
+            event.accept(Plate.GOLD_PLATE.get());
             //GEARS
-            event.accept(ModItems.STONE_GEAR);
-            event.accept(ModItems.IRON_GEAR);
-            event.accept(ModItems.GOLD_GEAR);
-            event.accept(ModItems.DIAMOND_GEAR);
-            event.accept(ModItems.COPPER_GEAR);
-            event.accept(ModItems.BRONZE_GEAR);
+            event.accept(Gears.GEAR_STONE.get());
+            event.accept(Gears.GEAR_IRON.get());
+            event.accept(Gears.GEAR_GOLD.get());
+            event.accept(Gears.GEAR_DIAMOND.get());
+            event.accept(Gears.GEAR_COPPER.get());
+            event.accept(Gears.GEAR_BRONZE.get());
             //MACHINES
-            event.accept(IDKBlocks.ELECTRIC_PRESS);
-            event.accept(IDKBlocks.ALLOY_FURNACE);
+            event.accept(Machines.ELECTRIC_PRESS);
+            event.accept(Machines.ALLOY_FURNACE);
             //ZINC
             event.accept(ModBlocks.ZINC_ORE);
             event.accept(ModBlocks.DEEPSLATE_ZINC_ORE);
-            event.accept(ModBlocks.ZINC_BLOCK);
-            event.accept(ModItems.RAW_ZINC);
-            event.accept(ModItems.ZINC);
+            event.accept(MetalBlocks.ZINC_BLOCK.get());
+            event.accept(Raw.RAW_ZINC.get());
+            event.accept(Ingots.INGOT_ZINC.get());
             //BRONZE
-            event.accept(ModItems.BRONZE_INGOT);
-            event.accept(ModItems.BRONZE_ROD);
-            event.accept(ModBlocks.BRONZE_BLOCK);
+            event.accept(Ingots.INGOT_BRONZE.get());
+            event.accept(Misc.STICK_BRONZE.get());
+            event.accept(MetalBlocks.BRONZE_BLOCK.get());
             //TIN
             event.accept(ModBlocks.DEEPSLATE_TIN_ORE);
             event.accept(ModBlocks.TIN_ORE);
-            event.accept(ModItems.TIN_INGOT);
-            event.accept(ModItems.RAW_TIN);
-            event.accept(ModBlocks.TIN_BLOCK);
+            event.accept(Ingots.INGOT_TIN.get());
+            event.accept(Raw.RAW_TIN.get());
+            event.accept(MetalBlocks.TIN_BLOCK.get());
             //MISC
-            event.accept(ModItems.STONE_STICK);
-            event.accept(ModItems.IRON_ROD);
+            event.accept(Ingredients.STICK_STONE.get());
+            event.accept(Misc.STICK_IRON.get());
             //MACHINE FRAMES
-            event.accept(ModBlocks.MACHINE_FRAME_ADVANCED);
-            event.accept(ModBlocks.MACHINE_FRAME_BASIC);
-            event.accept(ModBlocks.MACHINE_FRAME_INTERMEDIATE);
+            event.accept(MachineFrame.MACHINE_FRAME_ADVANCED.get());
+            event.accept(MachineFrame.MACHINE_FRAME_BASIC.get());
+            event.accept(MachineFrame.MACHINE_FRAME_INTERMEDIATE.get());
         }
     }
 

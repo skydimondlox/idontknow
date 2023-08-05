@@ -29,6 +29,7 @@ import net.skydimondlox.idontknowmod.api.EnumMetals;
 import net.skydimondlox.idontknowmod.api.IDKTags;
 import net.skydimondlox.idontknowmod.api.Lib;
 import net.skydimondlox.idontknowmod.api.IDKTags.MetalTags;
+import net.skydimondlox.idontknowmod.fluids.IDKFluidBlock;
 import net.skydimondlox.idontknowmod.register.IDKBlocks;
 import net.skydimondlox.idontknowmod.register.IDKBlocks.*;
 import net.skydimondlox.idontknowmod.util.IDKLogger;

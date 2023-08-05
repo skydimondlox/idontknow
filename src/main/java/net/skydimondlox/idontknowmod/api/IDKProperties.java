@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-public class Properties
+public class IDKProperties
 {
     public static final DirectionProperty FACING_ALL = DirectionProperty.create("facing", DirectionUtils.VALUES);
     public static final DirectionProperty FACING_HORIZONTAL = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
@@ -68,9 +68,9 @@ public class Properties
         }
     }
 
-    public static record IEObjState(VisibilityList visibility, Transformation transform)
+    public static record IDKObjState(VisibilityList visibility, Transformation transform)
     {
-        public IEObjState(VisibilityList visibility)
+        public IDKObjState(VisibilityList visibility)
         {
             this(visibility, Transformation.identity());
         }
@@ -78,10 +78,6 @@ public class Properties
 
     public static class Model
     {
-        @Deprecated
-        public static final ModelProperty<IEObjState> OBJ_STATE = new ModelProperty<>();
-        @Deprecated
-        public static final ModelProperty<Map<String, String>> TEXTURE_REMAP = new ModelProperty<>();
         public static final ModelProperty<Map<Direction, IOSideConfig>> SIDECONFIG = new ModelProperty<>();
         public static final ModelProperty<BlockPos> SUBMODEL_OFFSET = new ModelProperty<>();
     }

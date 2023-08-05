@@ -33,6 +33,8 @@ import net.skydimondlox.idontknowmod.block.BlockIDKSlab;
 import net.skydimondlox.idontknowmod.block.IBlock;
 import net.skydimondlox.idontknowmod.block.custom.AlloyFurnaceBlock;
 import net.skydimondlox.idontknowmod.block.custom.ElectricPressBlock;
+import net.skydimondlox.idontknowmod.block.entity.AlloyFurnaceBlockEntity;
+import net.skydimondlox.idontknowmod.block.entity.ElectricPressBlockEntity;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -127,6 +129,22 @@ public final class IDKBlocks {
         public static final BlockEntry<BaseBlock> IDONTKNOW = BlockEntry.simple("i_dont_know_block", DEFAULT_METAL_PROPERTIES);
         public static final BlockEntry<BaseBlock> ITSABLOCK = BlockEntry.simple("its_a_block", DEFAULT_METAL_PROPERTIES);
 
+        private static void init() {
+        }
+    }
+
+    public static final class Machines {
+
+        public static final BlockEntry<AlloyFurnaceBlockEntity> ALLOY_FURNACE = new BlockEntry<>(
+                "alloy_furnace", BlockBehaviour.Properties, p
+        );
+
+        public static final BlockEntry<ElectricPressBlockEntity> ELECTRIC_PRESS = new BlockEntry<>(
+                "electric_press", BlockBehaviour.Properties, p
+        );
+
+        private static void init() {
+        }
     }
 
     public static final class Metals
@@ -236,6 +254,8 @@ public final class IDKBlocks {
         REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         MetalBlocks.init();
         Metals.init();
+        idontknow.init();
+        Machines.init();
 
     }
 
@@ -243,7 +263,7 @@ public final class IDKBlocks {
     {
         public static final Collection<BlockEntry<?>> ALL_ENTRIES = new ArrayList<>();
 
-        private final RegistryObject<T> regObject;
+        private static final RegistryObject<T> regObject;
         private final Supplier<Properties> properties;
 
         public static BlockEntry<BaseBlock> simple(String name, Supplier<Properties> properties, Consumer<BaseBlock> extra)
@@ -298,7 +318,7 @@ public final class IDKBlocks {
             return get().defaultBlockState();
         }
 
-        public ResourceLocation getId()
+        public static ResourceLocation getId()
         {
             return regObject.getId();
         }

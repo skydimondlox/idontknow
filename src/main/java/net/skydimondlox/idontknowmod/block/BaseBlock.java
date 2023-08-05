@@ -10,15 +10,14 @@ package net.skydimondlox.idontknowmod.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.Output;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -35,11 +34,12 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.ticks.ScheduledTick;
+import net.skydimondlox.idontknowmod.api.IDKTags;
+import net.skydimondlox.idontknowmod.api.IDKProperties;
 
 import javax.annotation.Nullable;
 
@@ -47,8 +47,8 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
 {
     boolean isHidden;
     boolean hasFlavour;
+    //TODO wtf is variable opacity?
     protected int lightOpacity;
-    protected PushReaction mobilityFlag = PushReaction.NORMAL;
     protected final boolean notNormalBlock;
     private final boolean fitsIntoContainer;
 
@@ -87,7 +87,7 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
     @Override
     public String getNameForFlavour()
     {
-        return Registry.BLOCK.getKey(this).getPath();
+        return BuiltInRegistries.BLOCK.getKey(this).getPath();
     }
 
     @Override
@@ -114,19 +114,6 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
             return super.getLightBlock(state, worldIn, pos);
     }
 
-    public BaseBlock setMobility(PushReaction flag)
-    {
-        mobilityFlag = flag;
-        return this;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public PushReaction getPistonPushReaction(BlockState state)
-    {
-        return mobilityFlag;
-    }
-
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos)
     {
@@ -147,11 +134,11 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
         return state;
     }
 
-    public void onBlockPlacedBy(BlockPlaceContext context, BlockState state)
+    public void onIDKBlockPlacedBy(BlockPlaceContext context, BlockState state)
     {
     }
 
-    public boolean canBlockBePlaced(BlockState newState, BlockPlaceContext context)
+    public boolean canIDKBlockBePlaced(BlockState newState, BlockPlaceContext context)
     {
         return true;
     }
@@ -162,10 +149,9 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
         super.setPlacedBy(worldIn, pos, state, placer, stack);
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items)
+    public void fillCreativeTab(Output out)
     {
-        items.add(new ItemStack(this, 1));
+        out.accept(this);
     }
 
     @Override
@@ -188,16 +174,6 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
         ItemStack activeStack = player.getItemInHand(hand);
 
         return super.use(state, world, pos, player, hand, hit);
-    }
-
-    public InteractionResult hammerUseSide(Direction side, Player player, InteractionHand hand, Level w, BlockPos pos, BlockHitResult hit)
-    {
-        return InteractionResult.PASS;
-    }
-
-    public InteractionResult screwdriverUseSide(Direction side, Player player, InteractionHand hand, Level w, BlockPos pos, BlockHitResult hit)
-    {
-        return InteractionResult.PASS;
     }
 
     @Override
@@ -283,8 +259,8 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn)
     {
-        if(state.hasProperty(net.skydimondlox.idontknowmod.api.Properties.MIRRORED)&&canRotate()&&mirrorIn==Mirror.LEFT_RIGHT)
-            return state.setValue(net.skydimondlox.idontknowmod.api.Properties.MIRRORED, !state.getValue(net.skydimondlox.idontknowmod.api.Properties.MIRRORED));
+        if(state.hasProperty(IDKProperties.MIRRORED)&&canRotate()&&mirrorIn==Mirror.LEFT_RIGHT)
+            return state.setValue(IDKProperties.MIRRORED, !state.getValue(IDKProperties.MIRRORED));
         else
         {
             Property<Direction> facingProp = findFacingProperty(state);
@@ -301,10 +277,10 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
     @Nullable
     private Property<Direction> findFacingProperty(BlockState state)
     {
-        if(state.hasProperty(net.skydimondlox.idontknowmod.api.Properties.FACING_ALL))
-            return net.skydimondlox.idontknowmod.api.Properties.FACING_ALL;
-        else if(state.hasProperty(net.skydimondlox.idontknowmod.api.Properties.FACING_HORIZONTAL))
-            return net.skydimondlox.idontknowmod.api.Properties.FACING_HORIZONTAL;
+        if(state.hasProperty(IDKProperties.FACING_ALL))
+            return IDKProperties.FACING_ALL;
+        else if(state.hasProperty(IDKProperties.FACING_HORIZONTAL))
+            return IDKProperties.FACING_HORIZONTAL;
         else
             return null;
     }
@@ -312,7 +288,7 @@ public class BaseBlock extends Block implements IBlock, SimpleWaterloggedBlock
     protected boolean canRotate()
     {
         //Basic heuristic: Multiblocks should not be rotated depending on state
-        return !getStateDefinition().getProperties().contains(net.skydimondlox.idontknowmod.api.Properties.MULTIBLOCKSLAVE);
+        return !getStateDefinition().getProperties().contains(IDKProperties.MULTIBLOCKSLAVE);
     }
 
     /* LADDERS */

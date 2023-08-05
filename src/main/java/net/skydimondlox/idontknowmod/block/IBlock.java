@@ -9,16 +9,10 @@ package net.skydimondlox.idontknowmod.block;
  *
  */
 
-
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-
 public interface IBlock
 {
     boolean hasFlavour();
 
     String getNameForFlavour();
 
-    void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items);
 }

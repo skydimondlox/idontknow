@@ -16,7 +16,7 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.skydimondlox.idontknowmod.api.IDKTags;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.idontknowmod;
-import net.skydimondlox.idontknowmod.item.ModItems;
+import net.skydimondlox.idontknowmod.register.IDKBlocks.*;
 import net.skydimondlox.idontknowmod.register.IDKItems.*;
 import net.skydimondlox.idontknowmod.util.ModTags;
 
@@ -31,39 +31,35 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.PRESSED_IRON.get(), RecipeCategory.MISC,
-                ModBlocks.PRESSED_IRON_BLOCK.get());
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.PRESSED_GOLD.get(), RecipeCategory.MISC,
-                ModBlocks.PRESSED_GOLD_BLOCK.get());
         nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, Ingots.INGOT_ZINC.get(), RecipeCategory.MISC,
-                ModBlocks.ZINC_BLOCK.get());
+                MetalBlocks.ZINC_BLOCK.get());
         nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, Ingots.INGOT_BRONZE.get(), RecipeCategory.MISC,
-                ModBlocks.BRONZE_BLOCK.get());
+                MetalBlocks.BRONZE_BLOCK.get());
        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, Ingots.INGOT_TIN.get(), RecipeCategory.MISC,
-                ModBlocks.TIN_BLOCK.get());
+                MetalBlocks.TIN_BLOCK.get());
 
- //        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ELECTRIC_PRESS.get())
- //                .pattern("BIB")
- //                .pattern("IFI")
- //                .pattern("BRB")
- //                .define('F', Ingredient.of(Blocks.FURNACE))
-  //               .define('I', Ingredient.of(Items.IRON_INGOT))
- //                .define('R', Ingredient.of(Blocks.REDSTONE_BLOCK))
- //                .define('B', Tags.Items.STONE)
- //                .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
- //                        .of(Blocks.FURNACE).build()))
- //                .save(consumer);
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Machines.ELECTRIC_PRESS)
+                 .pattern("BIB")
+                 .pattern("IFI")
+                 .pattern("BRB")
+                 .define('F', Ingredient.of(Blocks.FURNACE))
+                 .define('I', Ingredient.of(Items.IRON_INGOT))
+                 .define('R', Ingredient.of(Blocks.REDSTONE_BLOCK))
+                 .define('B', Tags.Items.STONE)
+                 .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
+                         .of(Blocks.FURNACE).build()))
+                 .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ALLOY_FURNACE.get())
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Machines.ALLOY_FURNACE)
                  .pattern("ZRZ")
                  .pattern("RER")
                  .pattern("ZBZ")
-                 .define('E', Ingredient.of(ModBlocks.ELECTRIC_PRESS.get()))
+                 .define('E', Ingredient.of(Machines.ELECTRIC_PRESS))
                  .define('R', Ingredient.of(Items.REDSTONE))
                  .define('Z', Ingredient.of(IDKTags.zincIngot))
                  .define('B', Ingredient.of(IDKTags.ironGear))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(ModBlocks.ELECTRIC_PRESS.get()).build()))
+                         .of(Machines.ELECTRIC_PRESS).build()))
                  .save(consumer);
 
          ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Gears.GEAR_IRON.get())
@@ -144,7 +140,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .of(Items.IRON_INGOT).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_BASIC.get())
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MachineFrame.MACHINE_FRAME_BASIC.get())
                  .pattern("@$@")
                  .pattern("$#$")
                  .pattern("@$@")
@@ -155,36 +151,36 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .of(ModTags.Items.GEARS_IRON).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_INTERMEDIATE.get())
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MachineFrame.MACHINE_FRAME_INTERMEDIATE.get())
                  .pattern("@$@")
                  .pattern("$#$")
                  .pattern("@$@")
-                 .define('#', Ingredient.of(ModBlocks.MACHINE_FRAME_BASIC.get()))
+                 .define('#', Ingredient.of(MachineFrame.MACHINE_FRAME_BASIC.get()))
                  .define('$', Ingredient.of(Tags.Items.INGOTS_IRON))
                  .define('@', Ingredient.of(ModTags.Items.STORAGE_BLOCKS_ZINC))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(ModBlocks.MACHINE_FRAME_BASIC.get()).build()))
+                         .of(MachineFrame.MACHINE_FRAME_BASIC.get()).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_ADVANCED.get())
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MachineFrame.MACHINE_FRAME_ADVANCED.get())
                  .pattern("@$@")
                  .pattern("$#$")
                  .pattern("@$@")
-                 .define('#', Ingredient.of(ModBlocks.MACHINE_FRAME_INTERMEDIATE.get()))
+                 .define('#', Ingredient.of(MachineFrame.MACHINE_FRAME_INTERMEDIATE.get()))
                  .define('$', Ingredient.of(Tags.Items.GEMS_DIAMOND))
                  .define('@', Ingredient.of(Tags.Items.STORAGE_BLOCKS_DIAMOND))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(ModBlocks.MACHINE_FRAME_INTERMEDIATE.get()).build()))
+                         .of(MachineFrame.MACHINE_FRAME_INTERMEDIATE.get()).build()))
                  .save(consumer);
 
-         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MACHINE_FRAME_ADVANCED.get())
+         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Tools.STEEL_PICK.get())
                  .pattern("SSS")
                  .pattern(" W ")
                  .pattern(" W ")
                  .define('S', Ingredient.of(IDKTags.steelIngot))
                  .define('W', Ingredient.of(Items.STICK))
                  .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item()
-                         .of(ModBlocks.MACHINE_FRAME_INTERMEDIATE.get()).build()))
+                         .of(IDKTags.steelIngot).build()))
                  .save(consumer);
 
          ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 9)
@@ -192,7 +188,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .unlockedBy("has_items", inventoryTrigger(ItemPredicate.Builder.item().of(Blocks.COBWEB).build()))
                          .save(consumer, new ResourceLocation(idontknowmod.MOD_ID));
 
-        twoByTwoPacker(consumer, RecipeCategory.MISC, ModBlocks.ITSABLOCK.get(), ModItems.ITS_SOMETHING.get());
+        twoByTwoPacker(consumer, RecipeCategory.MISC, idontknow.ITSABLOCK.get(), IDontKnow.ITS_SOMETHING.get());
 
         oreBlasting(consumer, List.of(ModBlocks.ZINC_ORE.get()), RecipeCategory.MISC, Ingots.INGOT_ZINC.get(), 0.7f, 100, "zinc");
         oreSmelting(consumer, List.of(ModBlocks.ZINC_ORE.get()), RecipeCategory.MISC, Ingots.INGOT_ZINC.get(), 0.7f, 200, "zinc");
