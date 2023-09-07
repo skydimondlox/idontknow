@@ -3,7 +3,11 @@ package net.skydimondlox.idontknowmod.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -11,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -21,14 +26,17 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.ItemStackHandler;
-import net.skydimondlox.idontknowmod.networking.ModMessages;
-import net.skydimondlox.idontknowmod.networking.packet.EnergySyncS2CPacket;
+import net.skydimondlox.idontknowmod.block.custom.AlloyFurnaceBlock;
 import net.skydimondlox.idontknowmod.recipe.AlloyFurnaceRecipe;
 import net.skydimondlox.idontknowmod.screen.AlloyFurnaceMenu;
+import net.skydimondlox.idontknowmod.util.InventoryDirectionEntry;
+import net.skydimondlox.idontknowmod.util.InventoryDirectionWrapper;
 import net.skydimondlox.idontknowmod.util.ModEnergyStorage;
+import net.skydimondlox.idontknowmod.util.WrappedHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider {
@@ -36,30 +44,67 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            if(!level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
         }
-    };
 
-    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(60000, 256) {
         @Override
-        public void onEnergyChanged() {
-            setChanged();
-            ModMessages.sendToClients(new EnergySyncS2CPacket(this.energy, getBlockPos()));
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 0 -> true;
+                case 1 -> false;
+                case 2 -> stack.getItem() == Items.REDSTONE;
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
-    private static final int  ENERGY_REQ = 32;
 
-
+    private static final int INPUT_SLOT = 0;
+    private static final int INPUT_SLOT_2 = 1;
+    private static final int OUTPUT_SLOT = 2;
+    private static final int ENERGY_ITEM_SLOT = 3;
 
     private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.empty();
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            new InventoryDirectionWrapper(itemHandler,
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.NORTH, INPUT_SLOT, true),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
 
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 86;
+    private int maxProgress = 78;
+
+    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+
+    private ModEnergyStorage createEnergyStorage() {
+        return new ModEnergyStorage(64000, 200) {
+            @Override
+            public void onEnergyChanged() {
+                setChanged();
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        };
+    }
+
+    public ItemStack getRenderStack() {
+        ItemStack stack = itemHandler.getStackInSlot(OUTPUT_SLOT);
+
+        if(stack.isEmpty()) {
+            stack = itemHandler.getStackInSlot(INPUT_SLOT);
+        }
+
+        return stack;
+    }
 
     public AlloyFurnaceBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.ALLOY_FURNACE.get(), pPos, pBlockState);
+        super(ModBlockEntities.ALLOY_FURNACE_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
@@ -80,9 +125,22 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 
             @Override
             public int getCount() {
-                return 3;
+                return 2;
             }
         };
+    }
+
+    public IEnergyStorage getEnergyStorage() {
+        return this.ENERGY_STORAGE;
+    }
+
+    public void drops() {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override
@@ -96,23 +154,32 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         return new AlloyFurnaceMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
-    public IEnergyStorage getEnergyStorage() {
-        return ENERGY_STORAGE;
-    }
-
-    public void setEnergyLevel(int energy) {
-        this.ENERGY_STORAGE.setEnergy(energy);
-    }
-
-
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+
         if(cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
 
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if(directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(AlloyFurnaceBlock.FACING);
+
+                if(side == Direction.DOWN ||side == Direction.UP) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
 
         return super.getCapability(cap, side);
@@ -135,8 +202,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("alloy_furnace_progress", this.progress);
-        pTag.putInt("alloy_furnace.energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.putInt("alloy_furnace_progress", progress);
+        pTag.putInt("energy", ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(pTag);
     }
@@ -146,100 +213,119 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("alloy_furnace_progress");
-        ENERGY_STORAGE.setEnergy(pTag.getInt("alloy_furnace.energy"));
+        ENERGY_STORAGE.setEnergy(pTag.getInt("energy"));
     }
 
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
 
-        Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState state, AlloyFurnaceBlockEntity entity) {
-        if (level.isClientSide()) {
-            return;
-        }
+    public void tick(Level level, BlockPos blockPos, BlockState state) {
+        fillUpOnEnergy();
 
-        if(hasRedstoneInThirdSlot(entity)) {
-            entity.ENERGY_STORAGE.receiveEnergy(64, false);
-        }
-
-        if(hasRecipe(entity) && hasEnoughEnergy(entity)) {
-            entity.progress++;
-            extractEnergy(entity);
+        if (isOutputSlotEmptyOrReceivable() & hasRecipe()) {
+            increaseCraftingProcess();
+            extractEnergy();
             setChanged(level, blockPos, state);
 
-            if(entity.progress >= entity.maxProgress) {
-                craftItem(entity);
+            if (hasProgressedFinished()) {
+                craftItem();
+                resetProgress();
             }
         } else {
-            entity.resetProgress();
-            setChanged(level, blockPos, state);
+            resetProgress();
         }
 
     }
 
-    private static void extractEnergy(AlloyFurnaceBlockEntity entity) {
-        entity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+    private void extractEnergy() {
+        this.ENERGY_STORAGE.extractEnergy(100, false);
     }
 
-    private static boolean hasEnoughEnergy(AlloyFurnaceBlockEntity entity) {
-        return entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ * entity.maxProgress;
+    private void fillUpOnEnergy() {
+        if(hasEnergyItemInSlot(ENERGY_ITEM_SLOT)) {
+            this.ENERGY_STORAGE.receiveEnergy(3200, false);
+        }
     }
 
-    private static boolean hasRedstoneInThirdSlot(AlloyFurnaceBlockEntity entity) {
-        return entity.itemHandler.getStackInSlot(3).getItem() == Items.REDSTONE;
+    private boolean hasEnergyItemInSlot(int energyItemSlot) {
+        return !this.itemHandler.getStackInSlot(energyItemSlot).isEmpty() &&
+                this.itemHandler.getStackInSlot(energyItemSlot).getItem() == Items.REDSTONE;
+    }
+
+    private void craftItem() {
+        Optional<AlloyFurnaceRecipe> recipe = getCurrentRecipe();
+        ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
+
+        this.itemHandler.extractItem(INPUT_SLOT, 1, false);
+
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(resultItem.getItem(),
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + resultItem.getCount()));
     }
 
     private void resetProgress() {
         this.progress = 0;
     }
 
-    private static void craftItem(AlloyFurnaceBlockEntity pEntity) {
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+    private boolean hasProgressedFinished() {
+        return this.progress >= this.maxProgress;
+    }
+
+    private void increaseCraftingProcess() {
+        this.progress++;
+    }
+
+    private boolean hasRecipe() {
+        Optional<AlloyFurnaceRecipe> recipe = getCurrentRecipe();
+
+        if(recipe.isEmpty()) {
+            return false;
+        }
+        ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
+
+        return canInsertAmountIntoOutputSlot(resultItem.getCount())
+                && canInsertItemIntoOutputSlot(resultItem.getItem()) && hasEnoughEnergyToCraft();
+    }
+
+    private boolean hasEnoughEnergyToCraft() {
+        return this.ENERGY_STORAGE.getEnergyStored() >= 100 * maxProgress;
+    }
+
+    private Optional<AlloyFurnaceRecipe> getCurrentRecipe() {
+        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
+        for (int i = 0; i < this.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, this.itemHandler.getStackInSlot(i));
         }
 
-        Optional<AlloyFurnaceRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, inventory, level);
-
-        if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
-
-            pEntity.resetProgress();
-        }
-    }
-
-    private static boolean hasRecipe(AlloyFurnaceBlockEntity entity) {
-        Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<AlloyFurnaceRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, inventory, level);
-
-        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
-
+        return this.level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, inventory, level);
 
     }
 
-    private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack itemStack) {
-        return inventory.getItem(2).getItem() == itemStack.getItem() || inventory.getItem(2).isEmpty();
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
     }
 
-    private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
+    private boolean canInsertAmountIntoOutputSlot(int count) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize() >=
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count;
     }
 
+    private boolean isOutputSlotEmptyOrReceivable() {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+    }
 }

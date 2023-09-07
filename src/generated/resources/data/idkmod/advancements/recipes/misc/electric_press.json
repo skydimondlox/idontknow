@@ -30,5 +30,6 @@
     "recipes": [
       "idkmod:electric_press"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

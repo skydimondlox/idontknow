@@ -30,5 +30,6 @@
     "recipes": [
       "idkmod:iron_gear"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -18,14 +18,14 @@ public class ElectricPressMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public ElectricPressMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public ElectricPressMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ELECTRIC_PRESS_MENU.get(), id);
         checkContainerSize(inv,3);
         blockEntity = (ElectricPressBlockEntity) entity;
-        this.level = inv.player.level;
+        this.level = inv.player.level();
         this.data = data;
 
         addPlayerInventory(inv);
@@ -42,10 +42,6 @@ public class ElectricPressMenu extends AbstractContainerMenu {
 
     public boolean isCrafting() {
         return data.get(0) > 0;
-    }
-
-    public ElectricPressBlockEntity getBlockEntity() {
-        return this.blockEntity;
     }
 
     public int getScaledProgress() {

@@ -19,14 +19,14 @@ public class AlloyFurnaceMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public AlloyFurnaceMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public AlloyFurnaceMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ALLOY_FURNACE_MENU.get(), id);
         checkContainerSize(inv,4);
         blockEntity = (AlloyFurnaceBlockEntity) entity;
-        this.level = inv.player.level;
+        this.level = inv.player.level();
         this.data = data;
 
         addPlayerInventory(inv);
