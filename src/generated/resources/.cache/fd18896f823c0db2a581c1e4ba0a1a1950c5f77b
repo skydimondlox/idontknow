@@ -1,0 +1,21 @@
+// 1.20.1	2023-09-12T16:34:17.1805983	Tags for minecraft:item mod id idkmod
+33b640bd1c181e0e9d3a714737a9c68472e84f46 data/forge/tags/items/gears/bronze.json
+42f942563797e2d3e333c2586fecb16259c9ad42 data/forge/tags/items/gears/copper.json
+bdcca831f634e9e5fa541f47652ee0eee25e74be data/forge/tags/items/gears/diamond.json
+0a4f72019ce1d2c4b5c02b6311d015477ee63911 data/forge/tags/items/gears/gold.json
+43737b7467c729132dd7b3819d0492df1226c8b2 data/forge/tags/items/gears/iron.json
+821df0fe1498dd598ea9807639bf6dbb10049328 data/forge/tags/items/gears/stone.json
+5e4b5a5e3fb1ea658c18c41c3804bbc063e660e1 data/forge/tags/items/ingots/bronze.json
+cb95b4dbddebf3b43014502acabf9c0557676f14 data/forge/tags/items/ingots/steel.json
+e8c150a4ebc8a48c5406bd859922be545da78258 data/forge/tags/items/ingots/tin.json
+e14e3c3fb4baccec2952f81fc67a6501040fadbb data/forge/tags/items/ingots/zinc.json
+e2a15ef1c8e1bcc2d4bd5bbc61bceaeacabdf061 data/forge/tags/items/ores/tin.json
+d55306ddd5ee76e5cbed6b17a1e5d1d861cae36c data/forge/tags/items/ores/zinc.json
+fc34bb69b75fc12a641bcf299bf3a1aeb03bbfef data/forge/tags/items/storage_blocks/bronze.json
+8b3aabb84edc8ffcfa3cc4f0aa18504649823904 data/forge/tags/items/storage_blocks/steel.json
+506b574f3789c1697fdc9927d82418def4c46256 data/forge/tags/items/storage_blocks/tin.json
+a4222671452ab7d9975b95127dde4492a11cffe6 data/forge/tags/items/storage_blocks/zinc.json
+e50a0f6c21a8f79ee485db2c6b5147315b7225d3 data/idkmod/tags/items/machineframes.json
+ef25ed9f644ec0dcf26a65befc7b00782ed4531d data/idkmod/tags/items/machineframes/advanced.json
+f0a8ac77b642475d1275073c01a07cf4a188196a data/idkmod/tags/items/machineframes/basic.json
+e77b77d527250ee3a3c4f5b443106cd940386f44 data/idkmod/tags/items/machineframes/intermediate.json

@@ -1,0 +1,11 @@
+// 1.20.1	2023-09-12T16:34:17.1791105	Tags for minecraft:block mod id idkmod
+8b9e57182765b3117f19e8640b06c6f5f47f77f1 data/forge/tags/blocks/ores.json
+e2a15ef1c8e1bcc2d4bd5bbc61bceaeacabdf061 data/forge/tags/blocks/ores/tin.json
+d55306ddd5ee76e5cbed6b17a1e5d1d861cae36c data/forge/tags/blocks/ores/zinc.json
+fc34bb69b75fc12a641bcf299bf3a1aeb03bbfef data/forge/tags/blocks/storage_blocks/bronze.json
+8b3aabb84edc8ffcfa3cc4f0aa18504649823904 data/forge/tags/blocks/storage_blocks/steel.json
+506b574f3789c1697fdc9927d82418def4c46256 data/forge/tags/blocks/storage_blocks/tin.json
+a4222671452ab7d9975b95127dde4492a11cffe6 data/forge/tags/blocks/storage_blocks/zinc.json
+63aaa5c899e4154e900e64dc11ebfa7cc633863f data/minecraft/tags/blocks/mineable/pickaxe.json
+d2e4535b5e7a3e566eef499fbd370f22851060f0 data/minecraft/tags/blocks/needs_iron_tool.json
+c8089fc4729d03348066537c1d5ec4818d5452cb data/minecraft/tags/blocks/needs_stone_tool.json

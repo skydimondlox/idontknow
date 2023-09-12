@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-07T14:45:36.506918	Block States: idkmod
+// 1.20.1	2023-09-10T19:12:08.2650867	Block States: idkmod
 f09c3c1f89cd1aacdc6fbfc3d3f101e48c686e99 assets/idkmod/blockstates/alloy_furnace.json
 4a3249779d208fa0b21a66bc8e700465a6bb3208 assets/idkmod/blockstates/bronze_block.json
 077a5f221a2b5b84e9b95128edb6f92dad8674a8 assets/idkmod/blockstates/deepslateitsanore.json
@@ -10,6 +10,7 @@ b350f53221a66fb29c6b1e2db0415051d57562ea assets/idkmod/blockstates/deepslate_zin
 709fd5d7cb00727d5bd8fdb0219d056bc5b1c906 assets/idkmod/blockstates/itsanore.json
 ac9f63be29b5ffb1a972da44de499827e631a493 assets/idkmod/blockstates/pressedgoldblock.json
 9c01e216216434e0fccd9b63d92f29056cccc81d assets/idkmod/blockstates/pressedironblock.json
+708282128e32a4819966d462fb48be5c27fa08b2 assets/idkmod/blockstates/steel_block.json
 a499a28570a0bbd2287e4318eaae413bec8ec815 assets/idkmod/blockstates/tin_block.json
 112de80f73fc76c63bf449a0687e3beeb25452bc assets/idkmod/blockstates/tin_ore.json
 c011c418897aac026cb0001aa9be12f698dd5e78 assets/idkmod/blockstates/zinc_block.json
@@ -25,6 +26,7 @@ f63eabdfd2ed2c2bde33307e3e8c83e102cdb145 assets/idkmod/models/block/itsablock.js
 d904f178aaf43d472b75e46c014ee8cac4567468 assets/idkmod/models/block/itsanore.json
 f05646c20869c3519e546e7d247b6e9e806cb801 assets/idkmod/models/block/pressedgoldblock.json
 eb00eea1e73641a5d33f0e32e850086a7fcb6426 assets/idkmod/models/block/pressedironblock.json
+a3c6e2659e07295c3d85eaf62e1cea6b795957b6 assets/idkmod/models/block/steel_block.json
 c838b763a994c0e798472c65f06bdb8c23b502c6 assets/idkmod/models/block/tin_block.json
 9f54ab203a1b20f3bd2644c3b3e84f3965ad6686 assets/idkmod/models/block/tin_ore.json
 47f204fcf35c64c55c1905076f35093a9461382f assets/idkmod/models/block/zinc_block.json
@@ -40,6 +42,7 @@ d531b4916d5d58d75fc88379e174acad50b3a19d assets/idkmod/models/item/idontknowbloc
 ca53553486f70bfb813dcf93621c8354d8f79916 assets/idkmod/models/item/itsanore.json
 a5aab63d6e7de1b62f511fecb1ec19020d562f9b assets/idkmod/models/item/pressedgoldblock.json
 33a76ffa91c3dcb3291fa415d6fa0b4fc579b80e assets/idkmod/models/item/pressedironblock.json
+58c7b5aabbe26c1bec95bab94ae066fb09004c58 assets/idkmod/models/item/steel_block.json
 3644f2f49743fe70d9958459f473da607fa637e4 assets/idkmod/models/item/tin_block.json
 e57d011fc2241aea0afac775b273f8f77cecef78 assets/idkmod/models/item/tin_ore.json
 994724139086b77fe306a699f419b58c2a4476ee assets/idkmod/models/item/zinc_block.json

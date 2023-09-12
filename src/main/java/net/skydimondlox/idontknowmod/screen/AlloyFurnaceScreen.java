@@ -26,7 +26,7 @@ public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceMenu
     protected void init() {
         super.init();
         this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
+            this.titleLabelY = 10000;
 
         assignEnergyInfoArea();
     }
@@ -49,7 +49,7 @@ public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceMenu
 
     private void assignEnergyInfoArea() {
         energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
-                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage());
+                ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
     }
 
     @Override

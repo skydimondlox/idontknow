@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "idkmod:steel_ingot"
+    }
+  },
+  "pattern": [
+    "RSR",
+    "S S",
+    "RSR"
+  ],
+  "result": {
+    "item": "idkmod:machine_frame_basic"
+  },
+  "show_notification": true
+}

@@ -16,7 +16,12 @@
   "item.idkmod.tin_ingot": "Tin Ingot",
   "item.idkmod.raw_tin": "Raw Tin",
   "item.idkmod.stone_stick": "Stone Stick",
-  "item.idkmod.amzo_on_a_stick": "Stickzo",
+  "item.idkmod.steel_ingot": "Steel Ingot",
+  "item.idkmod.steel_nugget": "Steel Nugget",
+  "item.idkmod.bronze_nugget": "Bronze Nugget",
+  "item.idkmod.machine_frame_basic": "Basic Machine Frame",
+  "item.idkmod.machine_frame_intermediate": "Intermediate Machine Frame",
+  "item.idkmod.machine_frame_advanced": "Advanced Machine Frame",
 
   "block.idkmod.idontknowblock": "Block of I Don't Know",
   "block.idkmod.itsablock": "It's A Block",
@@ -33,7 +38,8 @@
   "block.idkmod.tin_ore": "Tin Ore",
   "block.idkmod.deepslate_tin_ore": "Deepslate Tin Ore",
   "block.idkmod.tin_block": "Block Of Tin",
+  "block.idkmod.steel_block": "Block Of Steel",
 
-  "creativetab.i_dont_know_tab": "I Dont Know Tab"
+  "creativetab.i_dont_know_tab": "I Don't Know"
 
 }

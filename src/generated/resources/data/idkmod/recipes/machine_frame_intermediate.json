@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "idkmod:machine_frame_basic"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "idkmod:steel_ingot"
+    }
+  },
+  "pattern": [
+    "RSR",
+    "SMS",
+    "RSR"
+  ],
+  "result": {
+    "item": "idkmod:machine_frame_intermediate"
+  },
+  "show_notification": true
+}

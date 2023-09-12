@@ -31,9 +31,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ZINC);
         simpleItem(ModItems.BRONZE_INGOT);
         simpleItem(ModItems.BRONZE_GEAR);
+        simpleItem(ModItems.BRONZE_NUGGET);
         simpleItem(ModItems.TIN_INGOT);
         simpleItem(ModItems.RAW_TIN);
         handheldItem(ModItems.STONE_STICK);
+        simpleItem(ModItems.STEEL_INGOT);
+        simpleItem(ModItems.STEEL_NUGGET);
+        simpleItem(ModItems.MACHINE_FRAME_BASIC);
+        simpleItem(ModItems.MACHINE_FRAME_INTERMEDIATE);
+        simpleItem(ModItems.MACHINE_FRAME_ADVANCED);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

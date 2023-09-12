@@ -19,17 +19,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.ITSABLOCK);
         blockWithItem(ModBlocks.ITSANORE);
         blockWithItem(ModBlocks.DEEPSLATEITSANORE);
+
         blockWithItem(ModBlocks.PRESSED_IRON_BLOCK);
         blockWithItem(ModBlocks.PRESSED_GOLD_BLOCK);
+
         blockWithItem(ModBlocks.ELECTRIC_PRESS);
+        blockWithItem(ModBlocks.ALLOY_FURNACE);
+
         blockWithItem(ModBlocks.DEEPSLATE_ZINC_ORE);
         blockWithItem(ModBlocks.ZINC_ORE);
         blockWithItem(ModBlocks.ZINC_BLOCK);
         blockWithItem(ModBlocks.BRONZE_BLOCK);
-        blockWithItem(ModBlocks.ALLOY_FURNACE);
         blockWithItem(ModBlocks.TIN_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_TIN_ORE);
         blockWithItem(ModBlocks.TIN_BLOCK);
+        blockWithItem(ModBlocks.STEEL_BLOCK);
     }
 
     private void blockWithItem(RegistryObject<Block>blockRegistryObject) {

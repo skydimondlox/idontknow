@@ -17,13 +17,12 @@ import org.jetbrains.annotations.Nullable;
 public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
+    private final NonNullList<Ingredient> inputItems;
 
-    public AlloyFurnaceRecipe(ResourceLocation id, ItemStack output,
-                               NonNullList<Ingredient> recipeItems) {
+    public AlloyFurnaceRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> inputItems) {
         this.id = id;
         this.output = output;
-        this.recipeItems = recipeItems;
+        this.inputItems = inputItems;
     }
 
     @Override
@@ -32,17 +31,17 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
             return false;
         }
 
-        return recipeItems.get(0).test(pContainer.getItem(0));
+        return inputItems.get(0).test(pContainer.getItem(0));
     }
 
     @Override
     public ItemStack assemble(SimpleContainer pContainer, RegistryAccess p_267165_) {
-        return output;
+        return output.copy();
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
+        return this.inputItems;
     }
 
 
@@ -63,38 +62,38 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return AlloyFurnaceRecipe.Serializer.INSTANCE;
+        return Serializer.INSTANCE;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return AlloyFurnaceRecipe.Type.INSTANCE;
+        return Type.INSTANCE;
     }
 
     public static class Type implements RecipeType<AlloyFurnaceRecipe> {
         private Type() { }
-        public static final AlloyFurnaceRecipe.Type INSTANCE = new Type();
+        public static final Type INSTANCE = new Type();
         public static final String ID = "alloy_furnace";
     }
 
 
     public static class Serializer implements RecipeSerializer<AlloyFurnaceRecipe> {
-        public static final AlloyFurnaceRecipe.Serializer INSTANCE = new Serializer();
+        public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(idontknowmod.MOD_ID, "alloy_furnace");
+                new ResourceLocation(idontknowmod.MOD_ID,"alloy_furnace");
 
         @Override
-        public AlloyFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+        public AlloyFurnaceRecipe fromJson(ResourceLocation id, JsonObject json) {
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
+            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new AlloyFurnaceRecipe(pRecipeId, output, inputs);
+            return new AlloyFurnaceRecipe(id, output, inputs);
         }
 
         @Override
@@ -118,6 +117,7 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
             }
             buf.writeItemStack(recipe.getResultItem(), false);
         }
+
     }
 
     public ItemStack getResultItem() {

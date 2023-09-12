@@ -53,6 +53,9 @@ public class ModItems {
     public static final RegistryObject<Item> BRONZE_GEAR = ITEMS.register("bronze_gear",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> BRONZE_NUGGET = ITEMS.register("bronze_nugget",
+            () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
             () -> new Item(new Item.Properties()));
 
@@ -60,6 +63,21 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> STONE_STICK = ITEMS.register("stone_stick",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> MACHINE_FRAME_BASIC = ITEMS.register("machine_frame_basic",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> MACHINE_FRAME_INTERMEDIATE = ITEMS.register("machine_frame_intermediate",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> MACHINE_FRAME_ADVANCED = ITEMS.register("machine_frame_advanced",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

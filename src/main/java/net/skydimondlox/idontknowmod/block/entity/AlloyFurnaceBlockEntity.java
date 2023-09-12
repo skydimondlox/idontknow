@@ -53,8 +53,9 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
                 case 0 -> true;
-                case 1 -> false;
-                case 2 -> stack.getItem() == Items.REDSTONE;
+                case 1 -> true;
+                case 2 -> false;
+                case 3 -> stack.getItem() == Items.REDSTONE;
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -256,6 +257,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
 
         this.itemHandler.extractItem(INPUT_SLOT, 1, false);
+        this.itemHandler.extractItem(INPUT_SLOT_2, 1, false);
 
         this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(resultItem.getItem(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + resultItem.getCount()));
