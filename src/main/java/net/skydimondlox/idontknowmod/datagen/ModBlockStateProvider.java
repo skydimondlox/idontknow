@@ -15,10 +15,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.IDONTKNOWBLOCK);
-        blockWithItem(ModBlocks.ITSABLOCK);
-        blockWithItem(ModBlocks.ITSANORE);
-        blockWithItem(ModBlocks.DEEPSLATEITSANORE);
 
         blockWithItem(ModBlocks.PRESSED_IRON_BLOCK);
         blockWithItem(ModBlocks.PRESSED_GOLD_BLOCK);

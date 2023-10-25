@@ -1,17 +1,15 @@
-// 1.20.1	2023-09-11T20:09:00.3428365	Item Models: idkmod
+// 1.20.1	2023-10-05T14:23:11.4281068	Item Models: idkmod
 174e0cdba59f88464eaf7670352db07b14336e9b assets/idkmod/models/item/bronze_gear.json
 eee8ed0e366d260a04036e1d83b854a050abe251 assets/idkmod/models/item/bronze_ingot.json
 373e713cc9a0ecb7111e0942c14572cbf5682d72 assets/idkmod/models/item/bronze_nugget.json
 1c6c3aea07f252bc138dd7a5e4a5836938460a7e assets/idkmod/models/item/copper_gear.json
 7437374ef3b082b02bbadb1225a2cede55193c5e assets/idkmod/models/item/diamond_gear.json
 ed97fc07d2ab11eb7bba30372d5e56e3bf7c9040 assets/idkmod/models/item/gold_gear.json
-efe63eab3cce3f14d6f5f06f425ff784a08c295b assets/idkmod/models/item/howboutthis.json
-1f7b256872cdbe03160330a7d974f00c518e55fe assets/idkmod/models/item/idontknow.json
 e42af608627711b461593504005ef24140ba4e76 assets/idkmod/models/item/iron_gear.json
-0361112355ee8bec4667b4f3b77045e406d5669f assets/idkmod/models/item/itssomething.json
 7e3e439b3373fb0074283af0f82e7c582a0c1082 assets/idkmod/models/item/machine_frame_advanced.json
 c83a8e22a8971170014b6ad3d5ea72c0877df256 assets/idkmod/models/item/machine_frame_basic.json
 00187bae904dded5fa260a064182d31ecc8d3465 assets/idkmod/models/item/machine_frame_intermediate.json
+55fff475b86270b19f891c11003e0ef160a62bc3 assets/idkmod/models/item/oil_bucket.json
 f0df4a30040bbe6c9fc667b5f45182e0ecb776c3 assets/idkmod/models/item/pressed_gold.json
 6c2c87d1e2a4ec4ae03d64af389502c94ade723f assets/idkmod/models/item/pressed_iron.json
 8a2f1fd20318db4fe2cded129fb715ab880efe3a assets/idkmod/models/item/raw_tin.json

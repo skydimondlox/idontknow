@@ -1,13 +1,9 @@
-// 1.20.1	2023-09-10T19:12:08.2670711	Loot Tables
+// 1.20.1	2023-10-05T14:23:11.4271151	Loot Tables
 25fd20f85fa9c8916fe567c431c8a8524a0cc7e0 data/idkmod/loot_tables/blocks/alloy_furnace.json
 2b6d82dd509db66e8e6157a9721290911357f174 data/idkmod/loot_tables/blocks/bronze_block.json
-0ab6b8905a1535c46644e91e517ecd3109a0ee34 data/idkmod/loot_tables/blocks/deepslateitsanore.json
 76ad494cd2c8698b5e8b68e86994303daa22f153 data/idkmod/loot_tables/blocks/deepslate_tin_ore.json
 7f491b39c4a81cdde08ab51b3b98aea226c11c45 data/idkmod/loot_tables/blocks/deepslate_zinc_ore.json
 a8b3129564b61254bfe6d18b3ae21d350c790ced data/idkmod/loot_tables/blocks/electric_press.json
-8dc525679e96387fa0fca0058281e2cc855855ab data/idkmod/loot_tables/blocks/idontknowblock.json
-ce08f6ea803b81437c584ee3b3e456417b757cce data/idkmod/loot_tables/blocks/itsablock.json
-5a8d27794589bbb6b8634294dbf24b7e36f5987e data/idkmod/loot_tables/blocks/itsanore.json
 f5aae4e6c0332fbf0ad49b58dea470a2b27544ae data/idkmod/loot_tables/blocks/pressedgoldblock.json
 bc161dca502b6cbfc4272a4e4f5a58fdd9445f03 data/idkmod/loot_tables/blocks/pressedironblock.json
 f34cc666a64545d930a1a7efcc34c77a2dbcd757 data/idkmod/loot_tables/blocks/steel_block.json

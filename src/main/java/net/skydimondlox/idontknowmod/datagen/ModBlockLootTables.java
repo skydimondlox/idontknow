@@ -18,8 +18,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.IDONTKNOWBLOCK.get());
-        this.dropSelf(ModBlocks.ITSABLOCK.get());
+
         this.dropSelf(ModBlocks.PRESSED_IRON_BLOCK.get());
         this.dropSelf(ModBlocks.PRESSED_GOLD_BLOCK.get());
         this.dropSelf(ModBlocks.ELECTRIC_PRESS.get());
@@ -29,10 +28,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.TIN_BLOCK.get());
         this.dropSelf(ModBlocks.STEEL_BLOCK.get());
 
-        this.add(ModBlocks.ITSANORE.get(),
-                (block) -> createOreDrop(ModBlocks.ITSANORE.get(), ModItems.ITS_SOMETHING.get()));
-        this.add(ModBlocks.DEEPSLATEITSANORE.get(),
-                (block) -> createOreDrop(ModBlocks.DEEPSLATEITSANORE.get(), ModItems.ITS_SOMETHING.get()));
         this.add(ModBlocks.DEEPSLATE_ZINC_ORE.get(),
                 (block) -> createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.add(ModBlocks.ZINC_ORE.get(),

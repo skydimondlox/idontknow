@@ -17,9 +17,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.I_DONT_KNOW);
-        simpleItem(ModItems.ITS_SOMETHING);
-        simpleItem(ModItems.HOW_BOUT_THIS);
         simpleItem(ModItems.PRESSED_IRON);
         simpleItem(ModItems.PRESSED_GOLD);
         simpleItem(ModItems.STONE_GEAR);
@@ -40,6 +37,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MACHINE_FRAME_BASIC);
         simpleItem(ModItems.MACHINE_FRAME_INTERMEDIATE);
         simpleItem(ModItems.MACHINE_FRAME_ADVANCED);
+        simpleItem(ModItems.OIL_BUCKET);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

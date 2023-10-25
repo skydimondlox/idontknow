@@ -155,8 +155,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                          .unlockedBy(getHasName(Blocks.COBWEB), has(Blocks.COBWEB))
                          .save(consumer, new ResourceLocation(idontknowmod.MOD_ID));
 
-        twoByTwoPacker(consumer, RecipeCategory.MISC, ModBlocks.ITSABLOCK.get(), ModItems.ITS_SOMETHING.get());
-
         oreBlasting(consumer, ZINC_SMELTABLES, RecipeCategory.MISC, ModItems.ZINC.get(), 0.7f, 100, "zinc");
         oreSmelting(consumer, ZINC_SMELTABLES, RecipeCategory.MISC, ModItems.ZINC.get(), 0.7f, 200, "zinc");
         oreBlasting(consumer, TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.7f, 100, "tin_ingot");

@@ -2,6 +2,8 @@ package net.skydimondlox.idontknowmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,6 +17,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.skydimondlox.idontknowmod.block.ModBlocks;
 import net.skydimondlox.idontknowmod.block.entity.ModBlockEntities;
+import net.skydimondlox.idontknowmod.fluid.ModFluidTypes;
+import net.skydimondlox.idontknowmod.fluid.ModFluids;
 import net.skydimondlox.idontknowmod.item.ModCreativeModeTabs;
 import net.skydimondlox.idontknowmod.item.ModItems;
 import net.skydimondlox.idontknowmod.recipe.ModRecipes;
@@ -40,6 +44,9 @@ public class idontknowmod {
         ModMenuTypes.register(modEventBus);
 
         ModRecipes.register(modEventBus);
+
+        ModFluids.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -77,6 +84,9 @@ public class idontknowmod {
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.ELECTRIC_PRESS_MENU.get(), ElectricPressScreen::new);
                 MenuScreens.register(ModMenuTypes.ALLOY_FURNACE_MENU.get(), AlloyFurnaceScreen::new);
+
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_OIL.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_OIL.get(), RenderType.translucent());
             });
         }
     }

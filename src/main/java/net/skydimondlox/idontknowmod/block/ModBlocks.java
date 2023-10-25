@@ -4,6 +4,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -11,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.skydimondlox.idontknowmod.block.custom.AlloyFurnaceBlock;
 import net.skydimondlox.idontknowmod.block.custom.ElectricPressBlock;
+import net.skydimondlox.idontknowmod.fluid.ModFluids;
 import net.skydimondlox.idontknowmod.idontknowmod;
 import net.skydimondlox.idontknowmod.item.ModItems;
 
@@ -19,22 +21,6 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, idontknowmod.MOD_ID);
-
-    public static final  RegistryObject<Block> IDONTKNOWBLOCK = registerBlock("idontknowblock",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final  RegistryObject<Block> ITSABLOCK = registerBlock("itsablock",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final  RegistryObject<Block> ITSANORE = registerBlock("itsanore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final  RegistryObject<Block> DEEPSLATEITSANORE = registerBlock("deepslateitsanore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
-                    .strength(6f).requiresCorrectToolForDrops()));
 
     public static final  RegistryObject<Block> PRESSED_IRON_BLOCK = registerBlock("pressedironblock",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
@@ -83,6 +69,9 @@ public class ModBlocks {
     public static final  RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                     .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<LiquidBlock> OIL_BLOCK = BLOCKS.register("oil_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_OIL, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

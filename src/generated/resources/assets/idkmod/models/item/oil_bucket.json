@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "idkmod:item/itssomething"
+    "layer0": "idkmod:item/oil_bucket"
   }
 }

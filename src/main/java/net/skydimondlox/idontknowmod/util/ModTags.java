@@ -2,10 +2,12 @@ package net.skydimondlox.idontknowmod.util;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.skydimondlox.idontknowmod.idontknowmod;
 
 public class ModTags {
@@ -57,6 +59,18 @@ public class ModTags {
 
         private static TagKey<Item> forgeTag(String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
+        }
+    }
+    public static class Fluids {
+
+        public static final TagKey<Fluid> OIL = forgeTag("oil");
+
+        private static TagKey<Fluid> tag(String name) {
+            return FluidTags.create(new ResourceLocation(idontknowmod.MOD_ID, name));
+        }
+
+        private static TagKey<Fluid> forgeTag(String name) {
+            return FluidTags.create(new ResourceLocation("forge", name));
         }
     }
 }

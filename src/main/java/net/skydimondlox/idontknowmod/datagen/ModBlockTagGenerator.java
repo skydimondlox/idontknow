@@ -45,12 +45,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         //MINECRAFT TAGS
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBlocks.ITSABLOCK.get(), ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModBlocks.ZINC_BLOCK.get(),
+                .add(ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModBlocks.ZINC_BLOCK.get(),
                         ModBlocks.TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get(), ModBlocks.TIN_BLOCK.get(), ModBlocks.STEEL_BLOCK.get() , ModBlocks.ALLOY_FURNACE.get(), ModBlocks.ELECTRIC_PRESS.get());
         this.tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.PRESSED_GOLD_BLOCK.get(), ModBlocks.PRESSED_IRON_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.ITSABLOCK.get(), ModBlocks.BRONZE_BLOCK.get(), ModBlocks.TIN_BLOCK.get(), ModBlocks.ZINC_BLOCK.get(), ModBlocks.TIN_ORE.get(),
+                .add(ModBlocks.BRONZE_BLOCK.get(), ModBlocks.TIN_BLOCK.get(), ModBlocks.ZINC_BLOCK.get(), ModBlocks.TIN_ORE.get(),
                         ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get(), ModBlocks.ALLOY_FURNACE.get(), ModBlocks.ELECTRIC_PRESS.get(),
                         ModBlocks.PRESSED_GOLD_BLOCK.get(), ModBlocks.PRESSED_IRON_BLOCK.get(), ModBlocks.STEEL_BLOCK.get());
     }

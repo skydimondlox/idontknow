@@ -41,6 +41,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.MACHINE_FRAME_BASIC.get());
                         output.accept(ModItems.MACHINE_FRAME_INTERMEDIATE.get());
                         output.accept(ModItems.MACHINE_FRAME_ADVANCED.get());
+                        output.accept(ModItems.OIL_BUCKET.get());
                     }).build());
 
     public static void  register(IEventBus eventBus) {
